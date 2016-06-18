@@ -1,0 +1,67 @@
+<md-toolbar style="background-image: url('../../assets/images/oceanWater.jpg'); height: 2vh; text-align: center"> <h1 style="  color: whitesmoke;font-size: 4vh; margin: .4em 0">Find Party Boats near you!</h1> </md-toolbar>
+<div style="text-align: center">
+  <uib-carousel no-pause="true" active="active" interval="3000" template-url="" no-wrap="false" style="width: 100%">
+    <uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
+      <img style="height: 450px; width: 100%" ng-src="{{slide.image}}" style="margin:auto;">
+      <div style="margin-top: -20%" class="carousel-caption">
+        <h1><i>"Had the best time, thanks findpartyboats.com!"</i><br>- Brennan</h1>
+      </div>
+    </uib-slide>
+  </uib-carousel>
+</div>
+<br>
+<div style="text-align:center; width: 100%;" class="row  md-padding">
+  <form class="pure-form">
+    <md-content>
+      <md-input-container style="text-align: center;">
+        <label>Zip Code</label>
+        <input type="number" class="searchField" maxlength="5" max="99999" ng-model="zipCode">
+      </md-input-container>
+      <md-button ui-sref="searchList" ng-disable="zipCode.toString().length != 5 " class="md-raised" style="height: 4vh; font-size: 2vh; background-color: #00b3ee; color: whitesmoke">Search</md-button>
+    </md-content>
+
+  </form>
+</div>
+<br>
+<section class="md-padding" style="text-align: center" layout="column">
+  <h2 style="margin-top: -2%">Featured Charters</h2>
+  <br>
+  <div layout="row" layout-sm="column" layout-xs="column" layout-align="space-between space-between" >
+    <md-card flex-xs="80" flex-sm="75"  class="featuredCard  center md-padding" style="margin-top:2%; text-align:center; background-repeat: no-repeat; background-image: url('../../assets/icons/ic_star_black_24px.svg');" ng-repeat="x in [0,1,2,3]">
+      <md-card-title class="center" layout="column">
+        <h4>Featured Boat Name</h4>
+        <h5 style="margin-top: 0"><i>Lacey Township NJ, 08731</i></h5>
+      </md-card-title>
+      <br>
+      <br>
+      <br>
+      Click to View Profile
+    </md-card>
+  </div>
+
+</section>
+<br>
+<md-divider class="center" flex="75" style="opacity: .4;"></md-divider>
+<br>
+<section class="preFooter md-padding" flex>
+  <div flex="75" class="center"  layout="row" layout-xs="column" style="margin: 0 auto" >
+
+    <div id="about" flex="45" flex-sm="80" flex-xs="100">
+      <b>About</b><br>
+      <p style="text-align: justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+      </p>
+    </div>
+      <div hide show-gt-sm flex="10"></div>
+    <div id="social" flex="45" flex-sm="80" flex-xs="100">
+      <b>Follow us on</b><br>
+        <div layout="row">
+          <md-icon style="float: left;" md-svg-src="../../assets/icons/facebook-box.svg"></md-icon>
+          <md-icon style="float: left;" md-svg-src="../../assets/icons/twitter-box.svg"></md-icon>
+        </div>
+    </div>
+
+
+  </div>
+
+
+</section>

@@ -1,0 +1,53 @@
+.center{
+  margin: 0 auto
+}
+
+.searchField{
+  margin: 0 auto;
+  height: 4vh;
+  width: 25%;
+  text-align: center;
+  font-size: 3vh;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+@media (min-width: 1200px) {
+  .featuredCard {
+    width:20%;
+  }
+}
+
+@media (max-width: 960px) {
+  .featuredCard {
+    width:40%;
+  }
+}
+
+@media (max-width: 600px) {
+  .featuredCard {
+    width:60%;
+  }
+
+  .searchField{
+    margin: 0 auto;
+    height: 4vh;
+    width: 60%;
+    text-align: center;
+    font-size: 3vh;
+  }
+}
+@media (max-width: 400px) {
+  .featuredCard {
+    width:80%;
+  }
+}
+@media (max-width: 300px) {
+  .featuredCard {
+    width:100%;
+  }
+}
