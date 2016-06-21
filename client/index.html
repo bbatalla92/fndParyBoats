@@ -10,6 +10,7 @@
     <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
+
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(client) app/vendor.css -->
       <!-- bower:css -->
@@ -20,6 +21,7 @@
     <!-- build:css({.tmp,client}) app/app.css -->
       <link rel="stylesheet" href="app/app.css">
       <!-- injector:css -->
+      <link rel="stylesheet" href="app/admin/admin.css">
       <link rel="stylesheet" href="app/app.css">
       <link rel="stylesheet" href="app/boatProfile/boatProfile.css">
       <link rel="stylesheet" href="app/main/main.css">
@@ -35,19 +37,34 @@
 
 
   </head>
-  <body ng-app="fndParyBoatsApp">
+  <body ng-app="fndParyBoatsApp" style="background-color: whitesmoke">
     <!--[if lt IE 7]>
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <!-- Add your site or application content here -->
-<!--
+
     <navbar></navbar>
--->
-    <div ui-view=""></div>
+    <div style="background-color: whitesmoke" ui-view=""></div>
 <!--
     <footer></footer>
 -->
+
+    <!--Firebase Code-->
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyCkDhfBJEjsAG_Ar12ZEO76w1UT-BKpe_s",
+        authDomain: "findpartyboat.firebaseapp.com",
+        databaseURL: "https://findpartyboat.firebaseio.com",
+        storageBucket: "findpartyboat.appspot.com"
+      };
+      firebase.initializeApp(config);
+    </script>
+
+
+
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
     <script>
@@ -78,17 +95,22 @@
       <script src="bower_components/angular-aria/angular-aria.js"></script>
       <script src="bower_components/angular-messages/angular-messages.js"></script>
       <script src="bower_components/angular-material/angular-material.js"></script>
+      <script src="bower_components/firebase/firebase.js"></script>
+      <script src="bower_components/angularfire/dist/angularfire.js"></script>
+      <script src="bower_components/geofire/dist/geofire.js"></script>
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:js(.tmp) app/app.js -->
       <script src="app/app.js"></script>
       <!-- injector:js -->
-      <script src="app/searchList/searchList.controller.js"></script>
+      <script src="app/main/main.js"></script>
+      <script src="app/admin/admin.controller.js"></script>
       <script src="app/app.constant.js"></script>
+      <script src="app/boatProfile/boatProfile.controller.js"></script>
       <script src="app/boatProfile/boatProfile.js"></script>
       <script src="app/main/main.controller.js"></script>
-      <script src="app/main/main.js"></script>
-      <script src="app/boatProfile/boatProfile.controller.js"></script>
+      <script src="app/admin/admin.js"></script>
+      <script src="app/searchList/searchList.controller.js"></script>
       <script src="app/searchList/searchList.js"></script>
       <script src="components/footer/footer.directive.js"></script>
       <script src="components/modal/modal.service.js"></script>
@@ -97,6 +119,8 @@
       <!-- endinjector -->
     <!-- endbuild -->
     <script src="services/util/util.service.js"></script>
+    <script src="services/dbService/dbService.js"></script>
+    <script src="Dialogs/loginDialog/loginDialog.js"></script>
 
   </body>
 </html>

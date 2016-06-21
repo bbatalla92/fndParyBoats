@@ -2,10 +2,10 @@
 
 (function() {
   angular.module('fndParyBoatsApp')
-    .controller('mainCtrl', function MainController($scope) {
+    .controller('mainCtrl', function MainController($scope, $mdDialog) {
 
         $scope.active = 0;
-
+      $scope.openLoginDialog = openLoginDialog;
         $scope.zipCode = 80731;
 
 
@@ -28,6 +28,25 @@
             id: 4
           }
         ]
+
+
+      //======= functions ===========
+
+      function openLoginDialog(ev){
+
+        $mdDialog.show({
+          controller: 'loginCtrl',
+          templateUrl: '../../Dialogs/loginDialog/loginDialog.html',
+          parent: angular.element(document.body),
+          targetEvent: ev,
+          clickOutsideToClose: true
+        });
+
+      }
+
+
+
+
       }
     )
 

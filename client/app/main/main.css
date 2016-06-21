@@ -2,6 +2,8 @@
   margin: 0 auto
 }
 
+
+
 .searchField{
   margin: 0 auto;
   height: 4vh;
@@ -19,6 +21,13 @@ input[type=number]::-webkit-outer-spin-button {
 @media (min-width: 1200px) {
   .featuredCard {
     width:20%;
+  }
+}
+
+@media (min-width: 900px) {
+  .carImage{
+    height: 550px;
+    width: 100%
   }
 }
 
@@ -45,6 +54,12 @@ input[type=number]::-webkit-outer-spin-button {
   .featuredCard {
     width:80%;
   }
+
+  .carImage{
+    height: 300px;
+    width: 100%
+  }
+
 }
 @media (max-width: 300px) {
   .featuredCard {

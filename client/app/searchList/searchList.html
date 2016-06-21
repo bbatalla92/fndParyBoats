@@ -1,11 +1,19 @@
-<md-toolbar style="background-image: url('../../assets/images/oceanWater.jpg'); height: 2vh; text-align: center"> <h1 style="  color: whitesmoke;font-size: 4vh; margin: .4em 0">Find Party Boats near you!</h1> </md-toolbar>
-
 <section class="container md-padding" layout="Row" style="width:100%; ">
 
 
   <div hide show-gt-sm class="md-padding" flex="25">
     <div  style="background-color: #00b3ee; margin: 0 auto; width: 200px; height: 75%; position: fixed" class="RightBotAd">
 
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <!-- findpartyboats.com -->
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-4869188479204194"
+           data-ad-slot="5463156866"
+           data-ad-format="auto"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
 
     </div>
   </div>
@@ -15,32 +23,44 @@
 
     <div ng-repeat="x in charters" layout="column" layout-align="space-around space-around" >
       <md-card layout="row" layout-xs="column" layout-align="space-around space-around" ng-click="setBoat(x)"  ui-sref="boatProfile">
-        <md-card-title layout="column" flex="40" flex-xs="100">
+        <md-card-title class="rmvPad" layout="column" flex="40" flex-xs="100">
           <h3 style="margin-top: 0px">{{x.boatName}}</h3>
           {{x.location}}
         </md-card-title>
-        <div style="text-align: center" flex="25" flex-xs="100">
-          <div style="margin: 10% 0 0 0">
+        <md-card-title class="rmvPad" style="text-align: center" flex="25" flex-xs="100">
+          <div style="text-align: center; margin:  auto;">
             <h4>Captain</h4>
             <h5>{{x.captain}}</h5>
           </div>
-        </div>
+        </md-card-title>
         <div flex="33" style="text-align: center" flex-xs="100">
-          <h5 style="margin: 5% 5% 5% 0; float: right"> Dist: 20 mi.</h5>
+          <h5 class="rmvMarg" style="margin: 5% 5% 5% 0; float: right"> Dist: 20 mi.</h5>
         </div>
       </md-card>
 
-      <div class="md-padding" style=" height: 50px; width: inherit; background-color: #00b3ee" ng-show="$index % 3 == 0" >
-        ad
-      </div>
+      <!--<div class="md-padding" style="" ng-show="$index % 3 == 0" >
+
+      </div>-->
     </div>
   </div>
 
   <div hide show-gt-sm  class="md-padding" flex="25">
     <div style="background-color: #00b3ee; margin: 0 auto; width: 200px; height: 75%; position: fixed" class="RightBotAd">
-
-
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <!-- findpartyboats.com -->
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-4869188479204194"
+           data-ad-slot="5463156866"
+           data-ad-format="auto"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
     </div>
   </div>
 
 </section>
+
+
+<div class="md-padding" >
+</div>

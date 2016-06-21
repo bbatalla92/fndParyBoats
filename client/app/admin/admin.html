@@ -1,0 +1,70 @@
+<md-content style="background-color: whitesmoke; margin: 0 auto" flex="60" flex-sm="80" flex-xs="100" >
+
+  <form style="text-align: center; margin: 0 auto" layout="column" layout-align="space-between">
+    <br>
+
+    <div layout="row">
+      <label style="margin-right: 15px">Upload Image:</label>
+      <br>
+      <input style="float: left" type="file" name="datafile" size="40">
+    </div>
+
+    <md-input-container>
+      <label>Charter Name</label>
+      <input required minlength="2" name="name" ng-model="charter.name" aria-label="Charter Name" >
+    </md-input-container>
+
+    <md-input-container>
+      <label>Captain Name</label>
+      <input required minlength="2" ng-model="charter.captain" aria-label="Charter Name">
+    </md-input-container>
+    <md-input-container>
+      <label>Website</label>
+      <input required minlength="2" ng-model="charter.website" aria-label="Charter Name">
+    </md-input-container>
+    <md-input-container>
+      <label>Email</label>
+      <input required minlength="2" aria-label="Charter Name" ng-model="charter.email">
+    </md-input-container>
+    <md-input-container>
+      <label>Phone Number</label>
+      <input required minlength="2" ng-model="charter.phoneNumber" aria-label="Charter Name">
+    </md-input-container>
+
+    <div style="border: solid 1px" layout="column">
+      <label>Location</label>
+      <md-input-container>
+        <label>State</label>
+        <input required minlength="2" ng-model="charter.state" aria-label="Charter Name">
+      </md-input-container>
+      <md-input-container>
+        <label>City</label>
+        <input required minlength="2" ng-model="charter.city" aria-label="Charter Name">
+      </md-input-container>
+      <md-input-container>
+        <label>Street Address</label>
+        <input required minlength="2" ng-model="charter.streetAddress" aria-label="Charter Name">
+      </md-input-container>
+      <md-input-container>
+        <label>Zip Code</label>
+        <input required minlength="2" ng-model="charter.zipCode" aria-label="Charter Name">
+      </md-input-container>
+
+    </div>
+
+      <br>
+      <br>
+
+      <label style="float: left;">Description</label>
+      <textarea rows="20" style="resize: vertical" required minlength="2" ng-model="charter.description" aria-label="Charter Name">
+      </textarea>
+
+  </form>
+
+<br>
+  <div style="float: right; margin-bottom: 20px">
+  <md-button class="md-raised md-warn">Cancel</md-button>
+  <md-button style="background-color: #ffff00  " class="md-raised">Preview</md-button>
+  <md-button class="md-raised md-primary">Submit</md-button>
+  </div>
+</md-content>

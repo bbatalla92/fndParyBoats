@@ -1,9 +1,15 @@
 'use strict';
 
+(function(){
 angular.module('fndParyBoatsApp')
-  .directive('navbar', () => ({
-    templateUrl: 'components/navbar/navbar.html',
-    restrict: 'E',
-    controller: 'NavbarController',
-    controllerAs: 'nav'
-  }));
+  .directive('navbar', function(){
+
+    return{
+      templateUrl: 'components/navbar/navbar.html',
+      restrict: 'E',
+      controller: 'NavbarController',
+      controllerAs: 'nav'
+    }
+  });
+
+})();

@@ -1,3 +1,45 @@
+<md-toolbar style="background-image: url('../../assets/images/oceanWater.jpg'); height: 2vh; text-align: center">
+  <div class="md-toolbar-tools">
+    <md-button style="min-width: 1%; margin-left: 2%" href="/">
+      <md-icon md-svg-src="../assets/icons/ic_home_white_24px.svg"></md-icon>
+    </md-button>
+    <span flex>
+          <h1 style="  color: whitesmoke;font-size: 4vh; margin: .4em 0">Find Party Boats!</h1>
+    </span>
+    <md-menu style="margin-right: 3%">
+      <md-button ng-show="userFlag" style="background-color: #00b3ee" class="md-icon-button md-raised" ng-click="openMenu($mdOpenMenu,$event)">
+        <md-icon md-svg-src="../assets/icons/ic_person_outline_white_24px.svg"></md-icon>
+      </md-button>
+      <md-menu-content width="4">
+        <md-menu-item>
+          <md-button href="/admin">
+            <!--<md-icon md-svg-icon="call:dialpad" md-menu-align-target></md-icon>-->
+            My Page
+          </md-button>
+        </md-menu-item>
+        <md-menu-item>
+          <md-button href="/" ng-click="ctrl.redial($event)">
+            <!--
+                        <md-icon md-svg-icon="call:dialpad" md-menu-align-target></md-icon>
+            -->
+            Logout
+          </md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu>
+  </div>
+</md-toolbar>
+<md-subheader>
+
+  <md-input-container class="md-icon-float md-block" style="width:25%; margin:0 auto; padding:0">
+    <!-- Use floating label instead of placeholder -->
+    <label>Search</label>
+    <md-icon md-svg-src="../../assets/icons/ic_search_black_24px.svg"></md-icon>
+    <input ng-model="zipCode" type="number">
+  </md-input-container>
+</md-subheader>
+
+<!--
 <div class="navbar navbar-default navbar-static-top" ng-controller="NavbarController">
   <div class="container">
     <div class="navbar-header">
@@ -18,3 +60,4 @@
     </div>
   </div>
 </div>
+-->

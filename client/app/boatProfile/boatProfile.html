@@ -1,14 +1,12 @@
-<md-toolbar style="background-image: url('../../assets/images/oceanWater.jpg'); height: 2vh; text-align: center"> <h1 style="  color: whitesmoke;font-size: 4vh; margin: .4em 0">Find Party Boats near you!</h1> </md-toolbar>
-
 
 <section class="md-padding" style="margin: 0 auto; text-align: center" flex="50" flex-sm="80" flex-xs="100">
-  <div layout="row">
-    <div flex="50">
-      <img style="width: 100%; height: 100%" src={{charter.proImage}} />
+  <div layout="row" layout-xs="column">
+    <div flex="50" flex-xs="100">
+      <img class="centerImg" style="width: 100%; height: 100%" src={{charter.proImage}} />
     </div>
-    <div flex="50" style="text-align: left; margin-left: 2%">
+    <div class="centerText" flex="50" flex-xs="100">
       <h1> <b>{{charter.boatName.toUpperCase()}}</b></h1>
-      <h3>Captain {{charter.captain}}</h3>
+      <h3>Captain <b>{{charter.captain}}</b></h3>
       <h4> <i>{{charter.location}}</i></h4>
       <h5>Website: <a href={{charter.websiteUrl}} target="_blank" ng-click="">{{charter.websiteUrl.substring(7)}}</a></h5>
       <h5>Phone Number: {{charter.phoneNumber}}</h5>

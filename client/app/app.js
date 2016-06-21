@@ -9,7 +9,8 @@ angular.module('fndParyBoatsApp', [
   'ui.bootstrap',
   'ngMaterial',
   'ngAnimate',
-  'ngAria'
+  'ngAria',
+  'firebase'
   ])
   .config(function($urlRouterProvider, $locationProvider) {
     $urlRouterProvider.otherwise('/');

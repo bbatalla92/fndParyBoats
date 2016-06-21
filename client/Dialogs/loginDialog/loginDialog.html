@@ -1,0 +1,78 @@
+<md-dialog>
+  <md-content class="md-padding" flex="100">
+    <div ng-hide="newAccount" layout="column">
+
+      <md-input-container class="md-block">
+        <label>Client Email</label>
+        <input required type="email" name="email" ng-model="user.email"
+               minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/" />
+        <div ng-messages="email.$error" role="alert">
+          <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+            Your email must be between 10 and 100 characters long and look like an e-mail address.
+          </div>
+        </div>
+      </md-input-container>
+
+      <md-input-container ng-hide="forgotPasswordFlag" class="md-block">
+        <label>Password</label>
+        <input required name="password" type="password" ng-model="user.password">
+        <div ng-messages="password.$error">
+          <div ng-message="required">This is required.</div>
+        </div>
+      </md-input-container>
+      <a ng-hide="forgotPasswordFlag" style=" cursor: pointer " ng-click="newAccount = true"> Create New Account </a>
+      <a ng-hide="forgotPasswordFlag" style=" cursor: pointer " ng-click="forgotPasswordFlag = true"> Forgot Password?</a>
+
+      <md-button ng-disabled ="!user.email.includes('@') || !user.email.includes('.') || user.password.length < 6" ng-hide="forgotPasswordFlag" style="background-color: #00d4b4" class="md-raised" ng-click="login()">Login</md-button>
+      <md-button ng-disabled ="!user.email.includes('@') || !user.email.includes('.')" ng-show="forgotPasswordFlag" style="background-color:#00d4b4 " class="md-raised" ng-click="forgotPassword(user.email)">Send</md-button>
+
+    </div>
+  </md-content>
+  <!-------------------------------------->
+  <!-- login above ----- new account below -->
+  <!-------------------------------------->
+
+  <md-content class="md-padding" flex="100">
+    <div ng-show="newAccount" layout="column">
+
+      <!-- Email -->
+      <md-input-container class="md-block">
+        <label>Client Email</label>
+        <input required type="email" name="newU.email" ng-model="newU.email"
+               minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/" />
+        <div ng-messages="newU.email.$error" role="alert">
+          <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+            Your email must be between 10 and 100 characters long and look like an e-mail address.
+          </div>
+        </div>
+      </md-input-container>
+
+      <!-- Password -->
+      <md-input-container class="md-block">
+        <label>Password</label>
+        <input minlength="6" required name="newU.password" type="password" ng-model="newU.password">
+        <div ng-messages="newU.password.$error">
+          <div ng-message="required">Password must be 6 or more in length.</div>
+        </div>
+      </md-input-container>
+
+      <!-- Confirm Password -->
+      <md-input-container class="md-block">
+        <label>Confirm Password</label>
+        <input required name="newU.conPass" type="password" ng-model="newU.conPass">
+        <div ng-messages="newU.conPass !== newU.password">
+          <div ng-message="required">Passwords Do not match</div>
+        </div>
+      </md-input-container>
+
+      <md-dialog-actions>
+        <md-button style="background-color: #c77405 " class="md-raised" ng-click="newAccount = false">Cancel</md-button>
+        <md-button ng-disabled="!newU.email.includes('@') || !newU.email.includes('.') || newU.password.length < 6 || newU.conPass !== newU.password" style="background-color: #00d4b4" class="md-raised" ng-click="createUser()">Submit</md-button>
+      </md-dialog-actions>
+
+    </div>
+
+
+
+  </md-content>
+</md-dialog>

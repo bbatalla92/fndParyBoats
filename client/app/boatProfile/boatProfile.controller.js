@@ -5,7 +5,6 @@
     .controller('profileCtrl', function($scope, util){
 
       $scope.charter = util.getCharter();
-      console.log($scope.charter);
 
 
 

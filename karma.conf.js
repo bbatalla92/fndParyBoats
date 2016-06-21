@@ -24,6 +24,9 @@ module.exports = function(config) {
       'client/bower_components/angular-aria/angular-aria.js',
       'client/bower_components/angular-messages/angular-messages.js',
       'client/bower_components/angular-material/angular-material.js',
+      'client/bower_components/firebase/firebase.js',
+      'client/bower_components/angularfire/dist/angularfire.js',
+      'client/bower_components/geofire/dist/geofire.js',
       'client/bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'client/app/app.js',

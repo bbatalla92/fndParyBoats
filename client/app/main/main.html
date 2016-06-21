@@ -1,18 +1,18 @@
-<md-toolbar style="background-image: url('../../assets/images/oceanWater.jpg'); height: 2vh; text-align: center"> <h1 style="  color: whitesmoke;font-size: 4vh; margin: .4em 0">Find Party Boats near you!</h1> </md-toolbar>
 <div style="text-align: center">
   <uib-carousel no-pause="true" active="active" interval="3000" template-url="" no-wrap="false" style="width: 100%">
     <uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
-      <img style="height: 450px; width: 100%" ng-src="{{slide.image}}" style="margin:auto;">
+      <img hide-xs style="height: 550px; width: 100%" ng-src="{{slide.image}}">
+      <img hide-gt-xs style="height: 300px; width: 100%" ng-src="{{slide.image}}">
       <div style="margin-top: -20%" class="carousel-caption">
         <h1><i>"Had the best time, thanks findpartyboats.com!"</i><br>- Brennan</h1>
       </div>
     </uib-slide>
   </uib-carousel>
 </div>
-<br>
-<div style="text-align:center; width: 100%;" class="row  md-padding">
-  <form class="pure-form">
-    <md-content>
+
+<div style="background-color: whitesmoke; text-align:center; width: 100%;" class="row  md-padding">
+  <form class="" >
+    <md-content style="background-color: whitesmoke">
       <md-input-container style="text-align: center;">
         <label>Zip Code</label>
         <input type="number" class="searchField" maxlength="5" max="99999" ng-model="zipCode">
@@ -23,7 +23,7 @@
   </form>
 </div>
 <br>
-<section class="md-padding" style="text-align: center" layout="column">
+<section class="md-padding" style="text-align: center; background-color: whitesmoke" layout="column">
   <h2 style="margin-top: -2%">Featured Charters</h2>
   <br>
   <div layout="row" layout-sm="column" layout-xs="column" layout-align="space-between space-between" >
@@ -40,24 +40,32 @@
   </div>
 
 </section>
-<br>
-<md-divider class="center" flex="75" style="opacity: .4;"></md-divider>
-<br>
-<section class="preFooter md-padding" flex>
-  <div flex="75" class="center"  layout="row" layout-xs="column" style="margin: 0 auto" >
+
+
+<section class="preFooter md-padding" flex style="background-color: whitesmoke">
+  <md-divider flex="75"></md-divider>
+  <br>
+  <div flex="75" class="center"  layout="column" style="margin: 0 auto" >
+
+    <div hide show-gt-sm flex="10"></div>
+
+    <div id="" flex="20" flex-sm="80" flex-xs="100">
+      <b>Login or Create an Account to add your boat!</b><br>
+      <md-button style="background-color: #00d4b4; color: whitesmoke" class="md-raised" ng-click="openLoginDialog()"> Add Boat </md-button>
+    </div>
 
     <div id="about" flex="45" flex-sm="80" flex-xs="100">
       <b>About</b><br>
       <p style="text-align: justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
       </p>
     </div>
-      <div hide show-gt-sm flex="10"></div>
-    <div id="social" flex="45" flex-sm="80" flex-xs="100">
+
+    <div id="social" flex="20" flex-sm="80" flex-xs="100">
       <b>Follow us on</b><br>
-        <div layout="row">
-          <md-icon style="float: left;" md-svg-src="../../assets/icons/facebook-box.svg"></md-icon>
-          <md-icon style="float: left;" md-svg-src="../../assets/icons/twitter-box.svg"></md-icon>
-        </div>
+      <div style="float: left;" layout="row">
+        <md-icon style="float: left;" md-svg-src="../../assets/icons/facebook-box.svg"></md-icon>
+        <md-icon style="float: left;" md-svg-src="../../assets/icons/twitter-box.svg"></md-icon>
+      </div>
     </div>
 
 
