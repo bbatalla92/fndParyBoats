@@ -1,0 +1,17 @@
+
+
+#headerTitle{
+  color: whitesmoke;
+  font-size: 4vh;
+  margin: .4em 0
+}
+
+@media (max-width: 450px) {
+
+  #headerTitle{
+    color: whitesmoke;
+    font-size: 6vw;
+    margin: .4em 0
+  }
+}
+

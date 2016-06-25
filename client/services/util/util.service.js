@@ -4,22 +4,9 @@
 angular.module('fndParyBoatsApp')
   .factory('util', function () {
     var charter;
-    var loggedInUser;
-
+    var loggedIn = false;
     function setCharter(chart){
       charter = chart;
-    }
-
-
-
-    function setLoggedInUser(user){
-      loggedInUser = user;
-    }
-    function getLoggedInUser(){
-      if(loggedInUser != null)
-        return loggedInUser;
-
-      return null
     }
 
     function getCharter(){
@@ -30,8 +17,7 @@ angular.module('fndParyBoatsApp')
     return {
       setCharter: setCharter,
       getCharter: getCharter,
-      setLoggedInUser: setLoggedInUser,
-      getLoggedInUser: getLoggedInUser
+      loggedIn: loggedIn
     };
   });
 

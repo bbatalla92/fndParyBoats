@@ -3,27 +3,40 @@
 (function(){
 
 angular.module('fndParyBoatsApp')
-  .controller('NavbarController', function($scope, util, dbService, $state){
+  .controller('NavbarController', function($scope, util, dbService, $state, $mdMenu){
+
+    $scope.zipCode = '';
+    $scope.$watch(function () {
+      $scope.userFlag = dbService.getCurrentUser();
+
+    });
+    $scope.subheaderFlag = false;
 
     $scope.$watch(function () {
-      //console.log(util.getLoggedInUser());
-      $scope.userFlag = util.getLoggedInUser();
+
+      if( $state.current.url == '/' || $state.current.url == '/admin') {
+        $scope.subheaderFlag = true;
+        return;
+      }
+
+      $scope.subheaderFlag = false;
 
     });
 
-
-    $scope.logout = function(){
-
+    $scope.logout = function(ev){
       dbService.userLogout();
-      util.setLoggedInUser(null);
       $scope.userFlag = false;
-      $state.go('')
+      $state.go('main');
+      $mdMenu.hide();
     };
 
     $scope.openMenu = function($mdOpenMenu,ev) {
       $mdOpenMenu(ev);
     };
 
+    $scope.closeMenu = function(ev) {
+      $mdMenu.hide();
+    };
 
   });
 

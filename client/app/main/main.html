@@ -10,7 +10,7 @@
   </uib-carousel>
 </div>
 
-<div style="background-color: whitesmoke; text-align:center; width: 100%;" class="row  md-padding">
+<div style="background-color: whitesmoke; text-align:center; width: 100%;" class=" md-padding">
   <form class="" >
     <md-content style="background-color: whitesmoke">
       <md-input-container style="text-align: center;">
@@ -19,7 +19,10 @@
       </md-input-container>
       <md-button ui-sref="searchList" ng-disable="zipCode.toString().length != 5 " class="md-raised" style="height: 4vh; font-size: 2vh; background-color: #00b3ee; color: whitesmoke">Search</md-button>
     </md-content>
+    <p>or Search by <a ui-sref="states">location</a></p>
+    <div layout="column">
 
+    </div>
   </form>
 </div>
 <br>
@@ -50,8 +53,8 @@
     <div hide show-gt-sm flex="10"></div>
 
     <div id="" flex="20" flex-sm="80" flex-xs="100">
-      <b>Login or Create an Account to add your boat!</b><br>
-      <md-button style="background-color: #00d4b4; color: whitesmoke" class="md-raised" ng-click="openLoginDialog()"> Add Boat </md-button>
+      <b>Login or Create an to add your lisitng, its FREE!</b><br>
+      <md-button style="background-color: #00d4b4; color: whitesmoke" class="md-raised" ng-click="openLoginDialog()"> Login </md-button>
     </div>
 
     <div id="about" flex="45" flex-sm="80" flex-xs="100">
@@ -70,6 +73,4 @@
 
 
   </div>
-
-
 </section>

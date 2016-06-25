@@ -4,7 +4,7 @@
       <md-icon md-svg-src="../assets/icons/ic_home_white_24px.svg"></md-icon>
     </md-button>
     <span flex>
-          <h1 style="  color: whitesmoke;font-size: 4vh; margin: .4em 0">Find Party Boats!</h1>
+          <h1 id="headerTitle">Find Party Boats!</h1>
     </span>
     <md-menu style="margin-right: 3%">
       <md-button ng-show="userFlag" style="background-color: #00b3ee" class="md-icon-button md-raised" ng-click="openMenu($mdOpenMenu,$event)">
@@ -12,13 +12,13 @@
       </md-button>
       <md-menu-content width="4">
         <md-menu-item>
-          <md-button href="/admin">
+          <md-button href="/admin" ng-click="closeMenu($event)">
             <!--<md-icon md-svg-icon="call:dialpad" md-menu-align-target></md-icon>-->
             My Page
           </md-button>
         </md-menu-item>
         <md-menu-item>
-          <md-button href="/" ng-click="ctrl.redial($event)">
+          <md-button href="/" ng-click="logout($event)">
             <!--
                         <md-icon md-svg-icon="call:dialpad" md-menu-align-target></md-icon>
             -->
@@ -29,14 +29,18 @@
     </md-menu>
   </div>
 </md-toolbar>
-<md-subheader>
-
-  <md-input-container class="md-icon-float md-block" style="width:25%; margin:0 auto; padding:0">
+<md-subheader ng-hide="subheaderFlag" style="padding: 0; height: 50px">
+<div layout="row" layout-align="end" style="margin-top: -19px; padding-right: 5%  " >
+  <md-input-container class="md-block" style="padding:0">
     <!-- Use floating label instead of placeholder -->
-    <label>Search</label>
-    <md-icon md-svg-src="../../assets/icons/ic_search_black_24px.svg"></md-icon>
-    <input ng-model="zipCode" type="number">
+    <label>Zip Code</label>
+    <input style="text-align:  center" maxlength="5" ng-model="zipCode" type="number">
   </md-input-container>
+  <md-button  style="min-width: 1%; height: 2%; margin: 0; padding: 1%;" ui-sref="searchList">
+    <md-icon  md-svg-src="../../assets/icons/ic_search_black_24px.svg"></md-icon>
+  </md-button>
+</div>
+
 </md-subheader>
 
 <!--

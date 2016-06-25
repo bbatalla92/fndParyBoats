@@ -20,12 +20,14 @@
 
   <div style="text-align: center; margin: 0 auto"  class="list" flex="50" flex-sm="80" flex-xs="100" >
     <h1>Boats Near You: </h1>
-
+    <div ng-show="loadingFlag" style="z-index: 10; position: absolute; top: 30%; left: 48%;" layout="row" layout-sm="column" layout-align="space-around">
+      <md-progress-circular md-mode="indeterminate" md-diameter="100"></md-progress-circular>
+    </div>
     <div ng-repeat="x in charters" layout="column" layout-align="space-around space-around" >
       <md-card layout="row" layout-xs="column" layout-align="space-around space-around" ng-click="setBoat(x)"  ui-sref="boatProfile">
         <md-card-title class="rmvPad" layout="column" flex="40" flex-xs="100">
-          <h3 style="margin-top: 0px">{{x.boatName}}</h3>
-          {{x.location}}
+          <h3 style="margin-top: 0px">{{x.name}}</h3>
+          <i>{{x.city}} {{x.state}}, {{x.zipCode}}</i>
         </md-card-title>
         <md-card-title class="rmvPad" style="text-align: center" flex="25" flex-xs="100">
           <div style="text-align: center; margin:  auto;">

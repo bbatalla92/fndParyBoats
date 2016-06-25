@@ -9,9 +9,10 @@
     .controller('loginCtrl', function($scope, dbService, $mdDialog, $state, util){
 
       $scope.newAccount = false;
+      $scope.loadingFlag = false;
       $scope.forgotPasswordFlag = false;
       $scope.user = {email:'', password: ''};
-      $scope.newU = {email:'brennan.batalla@gmail.com', password: 'cheeto1', conPass: ''};
+      $scope.newU = {email:'', password: '', conPass: ''};
 
 
 
@@ -21,30 +22,28 @@
 
       $scope.createUser = function(){
         console.log('Creating User');
-        dbService.createUser($scope.newU).then(function(data){
-          console.log("return Data",data);
-          if(data != null){
+        var b = dbService.createUser($scope.newU);
+          if(b){
+            console.log('b', b);
             $state.go('admin');
             $mdDialog.cancel();
-
           }
-        });
       };
 
 
       $scope.login = function(){
-        dbService.userLogin($scope.user).then(function(data){
+        $scope.loadingFlag = true;
+        dbService.userLogin($scope.user)
+          .then(function(data){
+            if(data != null){
+              $state.go('admin');
+            }
 
-          if(data != null){
-            util.setLoggedInUser(data);
-            $state.go('admin');
+            $scope.loadingFlag = false;
             $mdDialog.cancel();
 
-          }
+          });
 
-
-          console.log('current user2: ', util.getLoggedInUser());
-        });
 
       };
 

@@ -6,8 +6,11 @@
     <div layout="row">
       <label style="margin-right: 15px">Upload Image:</label>
       <br>
-      <input style="float: left" type="file" name="datafile" size="40">
+      <input style="float: left" type="file" ng-model-instance onchange="angular.element(this).scope().imageUpload(event)" name="datafile" accept="image/*">
     </div>
+    <br>
+    <img ng-src="{{charter.image}}">
+    <br>
 
     <md-input-container>
       <label>Charter Name</label>
@@ -31,40 +34,53 @@
       <input required minlength="2" ng-model="charter.phoneNumber" aria-label="Charter Name">
     </md-input-container>
 
-    <div style="border: solid 1px" layout="column">
+    <div style="border: solid 1px" layout="row" layout-sm="column" layout-xs="column">
       <label>Location</label>
-      <md-input-container>
-        <label>State</label>
-        <input required minlength="2" ng-model="charter.state" aria-label="Charter Name">
-      </md-input-container>
-      <md-input-container>
-        <label>City</label>
-        <input required minlength="2" ng-model="charter.city" aria-label="Charter Name">
-      </md-input-container>
-      <md-input-container>
-        <label>Street Address</label>
-        <input required minlength="2" ng-model="charter.streetAddress" aria-label="Charter Name">
-      </md-input-container>
-      <md-input-container>
-        <label>Zip Code</label>
-        <input required minlength="2" ng-model="charter.zipCode" aria-label="Charter Name">
-      </md-input-container>
-
+      <div>
+        <h1 class="md-title">Enter an address</h1>
+        <div layout="row">
+          <md-input-container>
+            <label>Street Name</label>
+            <input ng-model="charter.street">
+          </md-input-container>
+          <md-input-container>
+            <label>City</label>
+            <input ng-model="charter.city">
+          </md-input-container>
+          <md-input-container>
+            <label>State</label>
+            <md-select ng-model="charter.state">
+              <md-option ng-repeat="state in states" ng-model="charter.zipCode" value="{{state.abbreviation}}" ng-disabled="$index === 1">
+                {{state.abbreviation}}
+              </md-option>
+            </md-select>
+            <md-input-container>
+              <label>Zip Code</label>
+              <input ng-model="charter.zipCode">
+            </md-input-container>
+          </md-input-container>
+        </div>
+      </div>
     </div>
 
-      <br>
-      <br>
+    <br>
+    <br>
 
-      <label style="float: left;">Description</label>
+    <label style="float: left;">Description</label>
       <textarea rows="20" style="resize: vertical" required minlength="2" ng-model="charter.description" aria-label="Charter Name">
       </textarea>
 
   </form>
 
-<br>
+  <br>
   <div style="float: right; margin-bottom: 20px">
-  <md-button class="md-raised md-warn">Cancel</md-button>
-  <md-button style="background-color: #ffff00  " class="md-raised">Preview</md-button>
-  <md-button class="md-raised md-primary">Submit</md-button>
+    <md-button class="md-raised md-warn" ng-click="cancelChanges()">Cancel</md-button>
+    <md-button style="background-color: #ffff00  " ng-click="previewChanges()" class="md-raised">Preview</md-button>
+    <md-button class="md-raised md-primary" ng-click="saveChanges()">Save</md-button>
   </div>
 </md-content>
+
+
+
+
+
