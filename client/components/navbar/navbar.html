@@ -1,6 +1,6 @@
 <md-toolbar style="background-image: url('../../assets/images/oceanWater.jpg'); height: 2vh; text-align: center">
   <div class="md-toolbar-tools">
-    <md-button style="min-width: 1%; margin-left: 2%" href="/">
+    <md-button style="min-width: 1%; margin-left: 2%" href="/" ng-click="home()">
       <md-icon md-svg-src="../assets/icons/ic_home_white_24px.svg"></md-icon>
     </md-button>
     <span flex>
@@ -34,9 +34,9 @@
   <md-input-container class="md-block" style="padding:0">
     <!-- Use floating label instead of placeholder -->
     <label>Zip Code</label>
-    <input style="text-align:  center" maxlength="5" ng-model="zipCode" type="number">
+    <input style="text-align:  center" maxlength="5" ng-model="zipCode" type="text" pattern="[0-9]*">
   </md-input-container>
-  <md-button  style="min-width: 1%; height: 2%; margin: 0; padding: 1%;" ui-sref="searchList">
+  <md-button  style="min-width: 1%; height: 2%; margin: 0; padding: 1%;" ng-click="search()" ui-sref="searchList" >
     <md-icon  md-svg-src="../../assets/icons/ic_search_black_24px.svg"></md-icon>
   </md-button>
 </div>

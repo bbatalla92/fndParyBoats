@@ -2,48 +2,65 @@
 
 (function() {
   angular.module('fndParyBoatsApp')
-    .controller('mainCtrl', function MainController($scope, $mdDialog) {
+    .controller('mainCtrl', function MainController($scope, $mdDialog, $state, util, dbService) {
 
         $scope.active = 0;
-      $scope.openLoginDialog = openLoginDialog;
-        $scope.zipCode = 80731;
+        $scope.openLoginDialog = openLoginDialog;
+        $scope.zipCode;
+        $scope.search = search;
+        //$scope.test = test;
+        $scope.featuredClick = featuredClick;
+        $scope.featBoats = util.featuredList;
 
-
-
-        $scope.slides = [
-          {
-            image: 'assets/images/charter1.jpg',
-            id: 0
-          },{
-            image: 'assets/images/charter2.jpg',
-            id: 1
-          },{
-            image: 'assets/images/charter3.jpg',
-            id: 2
-          },{
-            image: 'assets/images/charter4.jpg',
-            id: 3
-          },{
-            image: 'assets/images/charter5.jpg',
-            id: 4
-          }
-        ]
-
-
-      //======= functions ===========
-
-      function openLoginDialog(ev){
-
-        $mdDialog.show({
-          controller: 'loginCtrl',
-          templateUrl: '../../Dialogs/loginDialog/loginDialog.html',
-          parent: angular.element(document.body),
-          targetEvent: ev,
-          clickOutsideToClose: true
+        $scope.$watch(function(){
+          $scope.userFlag = dbService.getCurrentUser();
         });
 
-      }
 
+
+        util.getCurrentPosition().then(function(data){
+          if(util.featuredList.length < 1){
+            dbService.getFeaturedCharterByZip(data.coords.latitude, data.coords.longitude)
+              .then(function(data){
+                console.log(data);
+                $scope.featBoats = data;
+              });
+          }
+
+        });
+
+
+
+        //======= functions ===========
+
+        function search(){
+          //console.log();
+          util.stateSelected = null;
+          util.charterList = [];
+          util.zipCode = $scope.zipCode;
+          $state.go('searchList')
+        }
+
+        function featuredClick(x){
+          $state.go('boatProfile');
+          util.setCharter(x);
+        }
+
+        function openLoginDialog(ev){
+
+          $mdDialog.show({
+            controller: 'loginCtrl',
+            templateUrl: '../../Dialogs/loginDialog/loginDialog.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose: true
+          });
+
+        }
+
+      $scope.test = function(){
+        console.log('Test');
+      }
 
 
 

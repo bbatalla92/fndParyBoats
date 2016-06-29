@@ -21,13 +21,16 @@
       };
 
       $scope.createUser = function(){
+        $scope.loadingFlag = true;
         console.log('Creating User');
-        var b = dbService.createUser($scope.newU);
-          if(b){
-            console.log('b', b);
+        dbService.createUser($scope.newU).then(function(data){
+          if(data){
             $state.go('admin');
             $mdDialog.cancel();
           }
+          $scope.loadingFlag = false;
+        });
+
       };
 
 

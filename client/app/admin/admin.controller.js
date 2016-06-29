@@ -26,7 +26,8 @@ angular.module('fndParyBoatsApp')
       state:'',
       zipCode:'',
       description:'',
-      image:''
+      image:'',
+      distance:0
     };
 
 
@@ -43,7 +44,8 @@ angular.module('fndParyBoatsApp')
       state:'',
       zipCode:'',
       description:'',
-      image:''
+      image:'',
+      distance:0
     };
 
     dbService.getCharterBoat().then(function(data){

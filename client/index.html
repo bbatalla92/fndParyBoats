@@ -3,129 +3,136 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <base href="/">
-    <title></title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <base href="/">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
 
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css(client) app/vendor.css -->
-      <!-- bower:css -->
-      <link rel='stylesheet' href='bower_components/bootstrap/dist/css/bootstrap.css' />
-      <link rel='stylesheet' href='bower_components/angular-material/angular-material.css' />
-      <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:css({.tmp,client}) app/app.css -->
-      <link rel="stylesheet" href="app/app.css">
-      <!-- injector:css -->
-      <link rel="stylesheet" href="app/admin/admin.css">
-      <link rel="stylesheet" href="app/app.css">
-      <link rel="stylesheet" href="app/boatProfile/boatProfile.css">
-      <link rel="stylesheet" href="app/main/main.css">
-      <link rel="stylesheet" href="app/searchList/searchList.css">
-      <link rel="stylesheet" href="app/states/states.css">
-      <link rel="stylesheet" href="components/footer/footer.css">
-      <link rel="stylesheet" href="components/navbar/navbar.css">
-      <!-- endinjector -->
-    <!-- endbuild -->
-    <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
-    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
-    <link rel='stylesheet' type='text/css' href='/resources/tutorial/css/example.css'>
-    <link rel="stylesheet" href="components/navbar/navbar.css">
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <!-- build:css(client) app/vendor.css -->
+  <!-- bower:css -->
+  <link rel='stylesheet' href='bower_components/bootstrap/dist/css/bootstrap.css' />
+  <link rel='stylesheet' href='bower_components/angular-material/angular-material.css' />
+  <!-- endbower -->
+  <!-- endbuild -->
+  <!-- build:css({.tmp,client}) app/app.css -->
+  <link rel="stylesheet" href="app/app.css">
+  <!-- injector:css -->
+  <link rel="stylesheet" href="app/admin/admin.css">
+  <link rel="stylesheet" href="app/app.css">
+  <link rel="stylesheet" href="app/boatProfile/boatProfile.css">
+  <link rel="stylesheet" href="app/main/main.css">
+  <link rel="stylesheet" href="app/searchList/searchList.css">
+  <link rel="stylesheet" href="app/states/states.css">
+  <link rel="stylesheet" href="components/footer/footer.css">
+  <link rel="stylesheet" href="components/navbar/navbar.css">
+  <!-- endinjector -->
+  <!-- endbuild -->
+  <!--
+      <script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>
+  -->
+  <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+  <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+  <link rel='stylesheet' type='text/css' href='/resources/tutorial/css/example.css'>
+  <link rel="stylesheet" href="components/navbar/navbar.css">
+  <link href='https://fonts.googleapis.com/css?family=Alegreya+Sans:400,800' rel='stylesheet' type='text/css'>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkDhfBJEjsAG_Ar12ZEO76w1UT-BKpe_s"
+          type="text/javascript"></script>
 
-    <link href='https://fonts.googleapis.com/css?family=Alegreya+Sans:400,800' rel='stylesheet' type='text/css'>
+</head>
+<body ng-app="fndParyBoatsApp" style="background-color: whitesmoke">
+<!--[if lt IE 7]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
 
+<!-- Add your site or application content here -->
 
-  </head>
-  <body ng-app="fndParyBoatsApp" style="background-color: whitesmoke">
-    <!--[if lt IE 7]>
-      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
-
-    <!-- Add your site or application content here -->
-
-    <navbar></navbar>
-    <div style="background-color: whitesmoke" ui-view=""></div>
+<navbar></navbar>
+<div style="background-color: whitesmoke" ui-view=""></div>
 <!--
     <footer></footer>
 -->
 
-    <!--Firebase Code-->
-    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
-    <script>
-      // Initialize Firebase
-      var config = {
-        apiKey: "AIzaSyCkDhfBJEjsAG_Ar12ZEO76w1UT-BKpe_s",
-        authDomain: "findpartyboat.firebaseapp.com",
-        databaseURL: "https://findpartyboat.firebaseio.com",
-        storageBucket: "findpartyboat.appspot.com"
-      };
-      firebase.initializeApp(config);
-    </script>
+<!--Firebase Code-->
+<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCkDhfBJEjsAG_Ar12ZEO76w1UT-BKpe_s",
+    authDomain: "findpartyboat.firebaseapp.com",
+    databaseURL: "https://findpartyboat.firebaseio.com",
+    storageBucket: "findpartyboat.appspot.com"
+  };
+  firebase.initializeApp(config);
+</script>
 
 
 
 
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+<!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-      ga('create', 'UA-55858055-3');
-      ga('send', 'pageview');
-    </script>
+  ga('create', 'UA-55858055-3');
+  ga('send', 'pageview');
+</script>
 
-    <!--[if lt IE 9]>
-    <script src="bower_components/es5-shim/es5-shim.js"></script>
-    <script src="bower_components/json3/lib/json3.min.js"></script>
-    <![endif]-->
-    <!-- build:js({client,node_modules}) app/vendor.js -->
-      <!-- bower:js -->
-      <script src="bower_components/jquery/dist/jquery.js"></script>
-      <script src="bower_components/angular/angular.js"></script>
-      <script src="bower_components/angular-resource/angular-resource.js"></script>
-      <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-      <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-      <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-      <script src="bower_components/lodash/dist/lodash.compat.js"></script>
-      <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-      <script src="bower_components/angular-animate/angular-animate.js"></script>
-      <script src="bower_components/angular-aria/angular-aria.js"></script>
-      <script src="bower_components/angular-messages/angular-messages.js"></script>
-      <script src="bower_components/angular-material/angular-material.js"></script>
-      <script src="bower_components/firebase/firebase.js"></script>
-      <script src="bower_components/angularfire/dist/angularfire.js"></script>
-      <script src="bower_components/geofire/dist/geofire.js"></script>
-      <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:js(.tmp) app/app.js -->
-      <script src="app/app.js"></script>
-      <!-- injector:js -->
-      <script src="app/searchList/searchList.controller.js"></script>
-      <script src="app/admin/admin.controller.js"></script>
-      <script src="app/app.constant.js"></script>
-      <script src="app/boatProfile/boatProfile.controller.js"></script>
-      <script src="app/boatProfile/boatProfile.js"></script>
-      <script src="app/main/main.controller.js"></script>
-      <script src="app/main/main.js"></script>
-      <script src="app/admin/admin.js"></script>
-      <script src="app/searchList/searchList.js"></script>
-      <script src="app/states/states.controller.js"></script>
-      <script src="app/states/states.js"></script>
-      <script src="components/footer/footer.directive.js"></script>
-      <script src="components/navbar/navbar.controller.js"></script>
-      <script src="components/navbar/navbar.directive.js"></script>
-      <!-- endinjector -->
-    <!-- endbuild -->
-    <script src="services/util/util.service.js"></script>
-    <script src="services/dbService/dbService.js"></script>
-    <script src="services/constantsService/constants.js"></script>
-    <script src="Dialogs/loginDialog/loginDialog.js"></script>
+<!--[if lt IE 9]>
+<script src="bower_components/es5-shim/es5-shim.js"></script>
+<script src="bower_components/json3/lib/json3.min.js"></script>
+<![endif]-->
+<!-- build:js({client,node_modules}) app/vendor.js -->
+<!-- bower:js -->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-resource/angular-resource.js"></script>
+<script src="bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="bower_components/lodash/dist/lodash.compat.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angular-aria/angular-aria.js"></script>
+<script src="bower_components/angular-messages/angular-messages.js"></script>
+<script src="bower_components/angular-material/angular-material.js"></script>
+<script src="bower_components/firebase/firebase.js"></script>
+<script src="bower_components/angularfire/dist/angularfire.js"></script>
+<script src="bower_components/geofire/dist/geofire.js"></script>
+<script src="bower_components/ngGeolocation/ngGeolocation.js"></script>
+<!-- endbower -->
+<!-- endbuild -->
+<!-- build:js(.tmp) app/app.js -->
+<script src="app/app.js"></script>
+<!-- injector:js -->
+<script src="app/main/main.js"></script>
+<script src="app/about/about.controller.js"></script>
+<script src="app/admin/admin.controller.js"></script>
+<script src="app/admin/admin.js"></script>
+<script src="app/app.constant.js"></script>
+<script src="app/boatProfile/boatProfile.controller.js"></script>
+<script src="app/boatProfile/boatProfile.js"></script>
+<script src="app/main/main.controller.js"></script>
+<script src="app/about/about.js"></script>
+<script src="app/searchList/searchList.controller.js"></script>
+<script src="app/searchList/searchList.js"></script>
+<script src="app/states/states.controller.js"></script>
+<script src="app/states/states.js"></script>
+<script src="components/footer/footer.directive.js"></script>
+<script src="components/navbar/navbar.controller.js"></script>
+<script src="components/navbar/navbar.directive.js"></script>
+<!-- endinjector -->
+<!-- endbuild -->
+<script src="services/util/util.service.js"></script>
+<script src="services/dbService/dbService.js"></script>
+<script src="services/constantsService/constants.js"></script>
+<script src="Dialogs/loginDialog/loginDialog.js"></script>
 
-  </body>
+
+</body>
 </html>

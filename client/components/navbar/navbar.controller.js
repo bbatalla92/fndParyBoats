@@ -11,6 +11,10 @@ angular.module('fndParyBoatsApp')
 
     });
     $scope.subheaderFlag = false;
+    $scope.search = search();
+
+
+    //====== Functons ======================
 
     $scope.$watch(function () {
 
@@ -37,6 +41,19 @@ angular.module('fndParyBoatsApp')
     $scope.closeMenu = function(ev) {
       $mdMenu.hide();
     };
+
+    $scope.home = function() {
+      util.charterList = [];
+    };
+
+    function search(){
+      console.log('navbar');
+      /*util.stateSelected = null;
+      util.charterList = [];
+      util.zipCode = $scope.zipCode;
+      $state.go('searchList')*/
+
+    }
 
   });
 

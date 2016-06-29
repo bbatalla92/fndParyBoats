@@ -14,28 +14,40 @@
         storageBucket: "findpartyboat.appspot.com"
       };
       firebase.initializeApp(config);
+      var geoFire = new GeoFire(rootRef.child('GeoFire'));
       // Get a reference to the storage service, which is used to create references in your storage bucket
       var storage = firebase.storage();
       // Create a storage reference from our storage service
       var storageRef = storage.ref();
       util.loggedIn = (getCurrentUser() != null);
 
+
+
+
+// ==================== functions =================================================
       function saveCharter(charter) {
 
         var user = getCurrentUser();
         rootRef.child('UserProfiles').child(user.uid).once('value', function (use) {
           util.loggedIn = use.val();
           var u = use.val();
+          var chartID  = '';
           if (u.boatId == null) {
-            var chartID = rootRef.child('boats').push(charter);
-            console.log(chartID);
+            chartID = rootRef.child('boats').push(charter);
+            rootRef.child('boats').child(chartID).child('featured').set(false);
             rootRef.child('UserProfiles').child(user.uid).child('boatId').set(chartID.key());
             rootRef.child('States').child(charter.state).child(chartID.key()).set(chartID.key());
           } else {
-            rootRef.child('Boats').child(u.boatId).set(charter);
+            chartID = u.boatId;
+            rootRef.child('boats').child(u.boatId).set(charter);
           }
 
+          util.getLatLong(charter.zipCode).then(function(data){
+            console.log(data);
+            rootRef.child('boats').child(u.boatId).child('location').set(data);
 
+            geoFire.set(chartID, [data.lat, data.long]);
+          });
           //
         });
       }
@@ -46,10 +58,12 @@
       }
 
       function newUser(newU){
+        var newFlag = $q.defer();
         firebase.auth().createUserWithEmailAndPassword(newU.email, newU.password).then(function(data){
           rootRef.child('UserProfiles').child(data.uid).set({email: data.email, uid: data.uid});
           rootRef.child('UserProfiles').child(data.uid).once('value', function(data){
             util.loggedIn = data.val();
+            newFlag.resolve(true);
           });
 
         }).catch(function(error) {
@@ -57,11 +71,11 @@
           var errorCode = error.code;
           var errorMessage = error.message;
           console.log('ERROR: ',error.message);
+          newFlag.resolve(error);
           return error;
         });
 
-        return true;
-
+        return newFlag.promise;
       }
 
       function test(){
@@ -90,11 +104,22 @@
         return charter.promise;
       }
 
-      function getAllCharters(image, uid){
+      function getCharterByKey(key){
+        var charter = $q.defer();
+        rootRef.child('boats').child(key).once('value', function (chart) {
+
+          charter.resolve(chart.val());
+        });
+
+        return charter.promise;
+      }
+
+
+      function getAllCharters(){
         var charters = $q.defer();
         rootRef.child('boats').once('value',function(data){
 
-          console.log(data.val());
+          // console.log(data.val());
           charters.resolve(data.val());
 
         });
@@ -124,7 +149,7 @@
       function userLogout() {
         firebase.auth().signOut();
         util.loggedIn = false;
-        console.log('Logged Out');
+        // console.log('Logged Out');
       }
 
       function userLogin(user){
@@ -133,7 +158,7 @@
         firebase.auth().signInWithEmailAndPassword(user.email, user.password)
           .then(function(user){
 
-            console.log(user);
+            // console.log(user);
 
             rootRef.child('UserProfiles').once('value', function(data){
               //console.log(data.val());
@@ -152,6 +177,116 @@
 
       }
 
+      function getAllStates(){
+        var states = $q.defer();
+        rootRef.child('States').once('value',function (data) {
+          states.resolve(data.val());
+        });
+        return states.promise;
+      }
+
+      function getChartersByState(state){
+        var b = $q.defer();
+        rootRef.child('boats').orderByChild('state').equalTo(state).once('value', function (data) {
+          b.resolve(data.val())
+        });
+
+        return b.promise;
+      }
+
+      function getCharterByZip(zip){
+        var charters = [];
+        var list = $q.defer();
+        var listFlag = false;
+        util.getLatLong(zip).then(function(data){
+          var geoQuery = geoFire.query({
+            center: [data.lat, data.long],
+            radius: 15.5343
+          });
+
+          geoQuery.on("key_entered", function(key, location, distance) {
+            listFlag = true;
+            getCharterByKey(key).then(function(boat){
+              boat.distance = convertToMiles(distance);
+
+              charters.push(boat);
+              list.resolve(charters);
+
+            });
+          });
+
+
+          geoQuery.on("ready", function(data) {
+            if(!listFlag){
+              list.resolve(null);
+            }
+          });
+
+
+
+        });
+
+
+        return list.promise;
+      }
+
+      function containsObject(obj, list) {
+        var i;
+        for (i = 0; i < list.length; i++) {
+          if (list[i] === obj) {
+            return true;
+          }
+        }
+
+        return false;
+      }
+
+      function getFeaturedCharterByZip(lat,long){
+        var featured = [];
+
+        var list = $q.defer();
+        var listFlag = false;
+
+        var geoQuery = geoFire.query({
+          center: [lat, long],
+          radius: 85
+        });
+
+        geoQuery.on("key_entered", function(key, location, distance) {
+          listFlag = true;
+
+          rootRef.child('boats').child(key).once('value', function (chart) {
+
+            var boat = chart.val();
+            if(boat.featured === true){
+              boat.distance = convertToMiles(distance);
+              if(!containsObject(boat, featured))
+                featured.push(boat);
+
+              util.featuredList = featured;
+              list.resolve(featured);
+            }
+          });
+
+        });
+
+
+        geoQuery.on("ready", function(data) {
+          if(!listFlag){
+            list.resolve(null);
+          }
+        });
+
+
+        return list.promise;
+      }
+
+      function convertToMiles(dist){
+        return dist * 1.60934;
+      }
+
+
+// ============== End of functions =======================================
 
       return {
         createUser: newUser,
@@ -163,7 +298,11 @@
         saveCharter: saveCharter,
         getCurrentUser: getCurrentUser,
         getCharterBoat: getCharterBoat,
-        getAllCharters: getAllCharters
+        getAllCharters: getAllCharters,
+        getAllStates: getAllStates,
+        getChartersByState: getChartersByState,
+        getCharterKeysByZip : getCharterByZip,
+        getFeaturedCharterByZip : getFeaturedCharterByZip
       };
     });
 

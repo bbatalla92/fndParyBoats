@@ -1,7 +1,12 @@
-<div class="md-padding">
-  <md-content style="margin: 0 auto; text-align: center">
-  <div style="margin: 0 auto" ng-repeat="state in states">
-  <h3>{{state.name}}  </h3>
-  </div>
+<div style=" background-color: whitesmoke; height: 600px" class="md-padding">
+  <md-content style="margin: 0 auto; text-align: center; background-color: whitesmoke; height: 100%">
+    <h1>States</h1>
+    <div ng-show="loadingFlag" style="z-index: 10; position: absolute; top: 30%; left: 48%;" layout="row" layout-sm="column" layout-align="space-around">
+      <md-progress-circular md-mode="indeterminate" md-diameter="100"></md-progress-circular>
+    </div>
+    <div style="margin: 0 auto; background-color: whitesmoke; cursor: pointer" ng-repeat="state in states">
+    <h3 ng-click="stateSelected(state)"><a style="color: black">{{state}}</a></h3>
+    </div>
   </md-content>
 </div>
+

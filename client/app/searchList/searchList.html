@@ -3,7 +3,6 @@
 
   <div hide show-gt-sm class="md-padding" flex="25">
     <div  style="background-color: #00b3ee; margin: 0 auto; width: 200px; height: 75%; position: fixed" class="RightBotAd">
-
       <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
       <!-- findpartyboats.com -->
       <ins class="adsbygoogle"
@@ -19,9 +18,13 @@
   </div>
 
   <div style="text-align: center; margin: 0 auto"  class="list" flex="50" flex-sm="80" flex-xs="100" >
-    <h1>Boats Near You: </h1>
+    <h1>Nearby Charters: </h1>
+
     <div ng-show="loadingFlag" style="z-index: 10; position: absolute; top: 30%; left: 48%;" layout="row" layout-sm="column" layout-align="space-around">
       <md-progress-circular md-mode="indeterminate" md-diameter="100"></md-progress-circular>
+    </div>
+    <div ng-hide="!noCharterFlag">
+      <h3 > Sorry, there are no charters in this area! If you know any, send them an email and let them know how awesome this site could be with their help!</h3>
     </div>
     <div ng-repeat="x in charters" layout="column" layout-align="space-around space-around" >
       <md-card layout="row" layout-xs="column" layout-align="space-around space-around" ng-click="setBoat(x)"  ui-sref="boatProfile">
@@ -36,7 +39,7 @@
           </div>
         </md-card-title>
         <div flex="33" style="text-align: center" flex-xs="100">
-          <h5 class="rmvMarg" style="margin: 5% 5% 5% 0; float: right"> Dist: 20 mi.</h5>
+          <h5 class="rmvMarg" style="margin: 5% 5% 5% 0; float: right"> Dist: {{Math.floor(x.distance)}} mi.</h5>
         </div>
       </md-card>
 
