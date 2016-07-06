@@ -28,6 +28,11 @@ module.exports = function(config) {
       'client/bower_components/angularfire/dist/angularfire.js',
       'client/bower_components/geofire/dist/geofire.js',
       'client/bower_components/ngGeolocation/ngGeolocation.js',
+      'client/bower_components/quill/dist/quill.js',
+      'client/bower_components/angular-quill/angular-quill.js',
+      'client/bower_components/ngQuill/src/ng-quill.min.js',
+      'client/bower_components/trix/dist/trix.js',
+      'client/bower_components/angular-trix/dist/angular-trix.js',
       'client/bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'client/app/app.js',

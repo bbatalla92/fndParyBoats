@@ -2,7 +2,7 @@
 (function(){
 
 angular.module('fndParyBoatsApp')
-  .controller('adminCtrl', function($scope, constantsService, $state, util, dbService){
+  .controller('adminCtrl', function($scope, constantsService, $state, util, dbService, $mdToast){
 
     (function() {
       if (dbService.getCurrentUser() == null){
@@ -10,7 +10,6 @@ angular.module('fndParyBoatsApp')
         $state.go('main');
       }
     })();
-
 
 
 
@@ -49,7 +48,6 @@ angular.module('fndParyBoatsApp')
     };
 
     dbService.getCharterBoat().then(function(data){
-      console.log('boat', data);
       curPost = angular.copy(data);
       $scope.charter = data;
     });
@@ -62,7 +60,17 @@ angular.module('fndParyBoatsApp')
     $scope.saveChanges = function(){
       curPost =  angular.copy($scope.charter);
       dbService.saveCharter($scope.charter);
+
+      $mdToast.show(
+        $mdToast.simple()
+          .textContent('Simple Toast!')
+          .position('bottom right')
+          .hideDelay(2000)
+      );
+
     };
+
+
     $scope.previewChanges = function(){
       util.setCharter($scope.charter);
       $state.go('boatProfile');

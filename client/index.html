@@ -7,20 +7,22 @@
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <base href="/">
-  <title></title>
-  <meta name="description" content="">
+  <title>Find Party Boats</title>
+  <meta name="description" content="Looking for a great fishing party boat near you? Click here and we will find you your next fishing excursions easily and for free near you by zip code or state!">
   <meta name="viewport" content="width=device-width">
 
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
   <!-- build:css(client) app/vendor.css -->
   <!-- bower:css -->
-  <link rel='stylesheet' href='bower_components/bootstrap/dist/css/bootstrap.css' />
-  <link rel='stylesheet' href='bower_components/angular-material/angular-material.css' />
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
+  <link rel="stylesheet" href="bower_components/trix/dist/trix.css" />
   <!-- endbower -->
   <!-- endbuild -->
   <!-- build:css({.tmp,client}) app/app.css -->
   <link rel="stylesheet" href="app/app.css">
   <!-- injector:css -->
+  <link rel="stylesheet" href="app/about/about.css">
   <link rel="stylesheet" href="app/admin/admin.css">
   <link rel="stylesheet" href="app/app.css">
   <link rel="stylesheet" href="app/boatProfile/boatProfile.css">
@@ -42,8 +44,14 @@
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkDhfBJEjsAG_Ar12ZEO76w1UT-BKpe_s"
           type="text/javascript"></script>
 
+  <!-- Fonts -->
+  <link href='https://fonts.googleapis.com/css?family=PT+Sans+Narrow|Share' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet" type='text/css'>
+  <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville" rel="stylesheet" type='text/css'>
+
+
 </head>
-<body ng-app="fndParyBoatsApp" style="background-color: whitesmoke">
+<body ng-app="fndParyBoatsApp" style="background-color: whitesmoke" ng-cloak>
 <!--[if lt IE 7]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
@@ -105,6 +113,11 @@
 <script src="bower_components/angularfire/dist/angularfire.js"></script>
 <script src="bower_components/geofire/dist/geofire.js"></script>
 <script src="bower_components/ngGeolocation/ngGeolocation.js"></script>
+<script src="bower_components/quill/dist/quill.js"></script>
+<script src="bower_components/angular-quill/angular-quill.js"></script>
+<script src="bower_components/ngQuill/src/ng-quill.min.js"></script>
+<script src="bower_components/trix/dist/trix.js"></script>
+<script src="bower_components/angular-trix/dist/angular-trix.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 <!-- build:js(.tmp) app/app.js -->

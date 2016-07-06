@@ -6,8 +6,8 @@
 
 <div style="background-color: whitesmoke; text-align:center; width: 100%;" class=" md-padding">
   <form class="" >
-    <md-content style="background-color: whitesmoke">
-      <md-input-container style="text-align: center;">
+    <md-content style="background-color: whitesmoke;overflow: hidden">
+      <md-input-container style="text-align: center; margin-bottom: -1%; ">
         <label>Zip Code</label>
         <input type="text" pattern="[0-9]*" class="searchField" maxlength="5" ng-model="zipCode">
       </md-input-container>
@@ -20,7 +20,7 @@
 </div>
 <br>
 <section class="md-padding" style="text-align: center; background-color: whitesmoke" layout="column">
-  <h2 style="margin-top: -2%">Featured Charters</h2>
+  <h2 ng-if="featBoats.length > 0" style="margin-top: -2%">Featured Charters</h2>
   <br>
   <div layout="row" layout-sm="column" layout-xs="column" layout-align="space-between space-between" >
     <md-card ng-click="featuredClick(x)" flex-xs="80" flex-sm="75"  class="featuredCard  center md-padding" style="margin-top:2%; text-align:center; background-repeat: no-repeat; background-image: url('../../assets/icons/ic_star_black_24px.svg');" ng-repeat="x in featBoats">
@@ -38,20 +38,20 @@
 
 
 <section class="preFooter md-padding" flex style="background-color: whitesmoke">
-  <md-divider flex="75"></md-divider>
+  <md-divider style="margin: 0 auto" flex="75"></md-divider>
   <br>
   <div flex="75" class="center"  layout="column" style="margin: 0 auto" >
 
     <div hide show-gt-sm flex="10"></div>
 
     <div ng-hide="userFlag" id="" flex="20" flex-sm="80" flex-xs="100">
-      <b>Login or Create an to add your lisitng, its FREE!</b><br>
+      <b>Login or Create an Account to add your lisitng, its FREE!</b><br>
       <md-button style="background-color: #00d4b4; color: whitesmoke" class="md-raised" ng-click="openLoginDialog()"> Login </md-button>
     </div>
 
     <div id="about" flex="45" flex-sm="80" flex-xs="100">
       <b>About</b><br>
-      <p style="text-align: justify"  >
+      <p class="aboutText" style="text-align: justify"  >
         With so much data in the world we believe that “like” information should be easily and conveniently accessible. So we challenged ourselves to create a seamless user experience that gets right down to the point.  We offer the capability to quickly find party boats anywhere in the United States for FREE! We allow you to search an area by zip code or by state.
         <span hide-xs>  If you love to fish and need to find a group fishing charter boat, then look no further that is what we are here for! Finding you party boats and fishing excursions easily and for free is what we do, providing you with the best possible experience for finding charter boats is how we do it.  You will find that we have the largest national directory
           of finding party boats in the US!  So if you are looking to find a fun group fishing experience near you, than look no further!...

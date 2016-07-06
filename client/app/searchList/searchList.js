@@ -4,8 +4,9 @@ angular.module('fndParyBoatsApp')
   .config(function ($stateProvider) {
     $stateProvider
       .state('searchList', {
-        url: '/searchList',
+        url: '/search',
         templateUrl: 'app/searchList/searchList.html',
-        controller: 'searchCtrl'
+        controller: 'searchCtrl',
+        reload: true
       });
   });

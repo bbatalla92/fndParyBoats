@@ -10,6 +10,7 @@
 
       $scope.newAccount = false;
       $scope.loadingFlag = false;
+      $scope.title = 'Login';
       $scope.forgotPasswordFlag = false;
       $scope.user = {email:'', password: ''};
       $scope.newU = {email:'', password: '', conPass: ''};
