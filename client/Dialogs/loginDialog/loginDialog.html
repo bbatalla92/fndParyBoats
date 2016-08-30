@@ -1,8 +1,8 @@
 <md-dialog>
   <md-toolbar style="min-height:50px; padding-left: 1%"><h2 style="margin: 10px;">{{title}}</h2></md-toolbar>
 
-  <md-content class="md-padding" flex="100">
-    <div ng-hide="newAccount" layout="column">
+  <md-content class="md-padding">
+    <div ng-hide="newAccount">
 
       <md-input-container class="md-block">
         <label>Email</label>
@@ -22,10 +22,14 @@
           <div ng-message="required">This is required.</div>
         </div>
       </md-input-container>
-      <a ng-hide="forgotPasswordFlag" style=" cursor: pointer " ng-click="newAccount = true; title='New Account'"> Create New Account </a>
-      <a ng-hide="forgotPasswordFlag" style=" cursor: pointer " ng-click="forgotPasswordFlag = true;  title='Forgot Password'"> Forgot Password?</a>
 
-      <md-button ng-disabled ="!user.email.includes('@') || !user.email.includes('.') || user.password.length < 6" ng-hide="forgotPasswordFlag" style="background-color: #00d4b4" class="md-raised" ng-click="login()">Login</md-button>
+      <p ng-if="loginError != undefined && !newAccount && !forgotPasswordFlag" style="color: red"> {{loginError}} </p>
+
+      <a ng-hide="forgotPasswordFlag" style=" cursor: pointer " ng-click="newAccount = true; title='New Account'"> Create New Account </a>
+      <br>
+      <a ng-hide="forgotPasswordFlag" style=" cursor: pointer " ng-click="forgotPasswordFlag = true;  title='Forgot Password'"> Forgot Password?</a>
+<br>
+      <md-button ng-disabled ="!user.email.includes('@') || !user.email.includes('.') || user.password.length < 6" ng-hide="forgotPasswordFlag" style="background-color: #00d4b4; width: 100%; margin: 0 auto; display: block" class="md-raised" ng-click="login()">Login</md-button>
 
       <!------------------------------------------------------>
       <!-- login above ----- Forgot Password buttons below-->
@@ -40,8 +44,8 @@
   <!-- login & forgot Password buttons above ----- new account below -->
   <!-------------------------------------->
 
-  <md-content class="md-padding" flex="100">
-    <div ng-show="newAccount" layout="column">
+  <md-content class="md-padding">
+    <div ng-show="newAccount">
 
       <!-- Email -->
       <md-input-container class="md-block">
@@ -73,8 +77,10 @@
         </div>
       </md-input-container>
 
+        <p ng-if="newAccountError != undefined && newAccount" style="color: red"> {{newAccountError}} </p>
+
       <md-dialog-actions>
-        <md-button style="color:whitesmoke;" class="md-raised md-warn" ng-click="newAccount = false;  title='Login'">Cancel</md-button>
+        <md-button ng-hide="confirmingBoat" style="color:whitesmoke;" class="md-raised md-warn" ng-click="createAccountCancel()">Cancel</md-button>
         <md-button ng-disabled="!newU.email.includes('@') || !newU.email.includes('.') || newU.password.length < 6 || newU.conPass !== newU.password" style="background-color: #00d4b4" class="md-raised" ng-click="createUser()">Submit</md-button>
       </md-dialog-actions>
 

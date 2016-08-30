@@ -10,17 +10,14 @@ angular.module('fndParyBoatsApp')
     $scope.loadingFlag = true;
 
     dbService.getAllStates().then(function(data){
-    //  console.log(data);
-    //  console.log(Object.keys(data));
       $scope.states = Object.keys(data);
       $scope.loadingFlag = false;
 
     });
 
-    $scope.stateSelected = function(state){
+    $scope.stateSelected = function(stat){
       util.charterList = [];
-//      console.log(state);
-      util.stateSelected = state;
+      util.stateSelected = stat;
       $state.go('searchList')
     }
 

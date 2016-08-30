@@ -1,6 +1,11 @@
 
+
+
 <section class="md-padding" style="margin: 0 auto; text-align: center" flex="50" flex-sm="80" flex-xs="100">
-  <div layout="row" layout-xs="column">
+  <div ng-show="loadingFlag" style="z-index: 10; position: absolute; top: 30%; left: 50%; margin-left: -50px" layout="row" layout-sm="column" layout-align="space-around">
+    <md-progress-circular md-mode="indeterminate" md-diameter="100"></md-progress-circular>
+  </div>
+  <div ng-hide="loadingFlag" layout-gt-xs="row">
     <div flex="50" flex-xs="100">
       <img class="centerImg" style="width: 100%; height: 100%" ng-src={{charter.image}} />
     </div>
@@ -22,4 +27,9 @@
 
 </section>
 
-
+<div ng-hide="previewMode == false" flex style="background-color: #dddd00; opacity: .5; position: fixed; width: 100%" layout="row">
+  <div style="margin: 0 auto">
+    <md-button ng-click="previewBack()" class="md-raised md-primary">Back</md-button>
+    <md-button ng-click="previewSave()" class="md-raised md-warned">Save</md-button>
+  </div>
+</div>

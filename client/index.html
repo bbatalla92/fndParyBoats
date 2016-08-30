@@ -8,8 +8,12 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <base href="/">
   <title>Find Party Boats</title>
-  <meta name="description" content="Looking for a great fishing party boat near you? Click here and we will find you your next fishing excursions easily and for free near you by zip code or state!">
+  <meta name="description" content="Looking for a great group fishing boat near you? Click here and we will find you your next fishing excursion easily and for free near you by zip code or state!">
   <meta name="viewport" content="width=device-width">
+  <meta robots="index,follow">
+  <meta keywords="fishing, party boats, group party boats, group fishing, charter boats, fishing group, find party boats, find party boats near me, find charter boats, find charter boats near me, fising excursions, fishing adventure">
+  <link rel="icon" href="assets/icons/fish.ico"/>
+
 
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
   <!-- build:css(client) app/vendor.css -->
@@ -28,6 +32,7 @@
   <link rel="stylesheet" href="app/boatProfile/boatProfile.css">
   <link rel="stylesheet" href="app/main/main.css">
   <link rel="stylesheet" href="app/searchList/searchList.css">
+  <link rel="stylesheet" href="app/siteAdmin/siteAdmin.css">
   <link rel="stylesheet" href="app/states/states.css">
   <link rel="stylesheet" href="components/footer/footer.css">
   <link rel="stylesheet" href="components/navbar/navbar.css">
@@ -38,7 +43,6 @@
   -->
   <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
   <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
-  <link rel='stylesheet' type='text/css' href='/resources/tutorial/css/example.css'>
   <link rel="stylesheet" href="components/navbar/navbar.css">
   <link href='https://fonts.googleapis.com/css?family=Alegreya+Sans:400,800' rel='stylesheet' type='text/css'>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkDhfBJEjsAG_Ar12ZEO76w1UT-BKpe_s"
@@ -60,6 +64,7 @@
 
 <navbar></navbar>
 <div style="background-color: whitesmoke" ui-view=""></div>
+
 <!--
     <footer></footer>
 -->
@@ -123,7 +128,7 @@
 <!-- build:js(.tmp) app/app.js -->
 <script src="app/app.js"></script>
 <!-- injector:js -->
-<script src="app/main/main.js"></script>
+<script src="app/searchList/searchList.controller.js"></script>
 <script src="app/about/about.controller.js"></script>
 <script src="app/admin/admin.controller.js"></script>
 <script src="app/admin/admin.js"></script>
@@ -131,9 +136,11 @@
 <script src="app/boatProfile/boatProfile.controller.js"></script>
 <script src="app/boatProfile/boatProfile.js"></script>
 <script src="app/main/main.controller.js"></script>
+<script src="app/main/main.js"></script>
 <script src="app/about/about.js"></script>
-<script src="app/searchList/searchList.controller.js"></script>
 <script src="app/searchList/searchList.js"></script>
+<script src="app/siteAdmin/siteAdmin.controller.js"></script>
+<script src="app/siteAdmin/siteAdmin.js"></script>
 <script src="app/states/states.controller.js"></script>
 <script src="app/states/states.js"></script>
 <script src="components/footer/footer.directive.js"></script>

@@ -1,12 +1,14 @@
 'use strict';
 (function(){
 
-angular.module('fndParyBoatsApp')
+  angular.module('fndParyBoatsApp')
   .controller('adminCtrl', function($scope, constantsService, $state, util, dbService, $mdToast){
 
     (function() {
+
+
       if (dbService.getCurrentUser() == null){
-        console.log('No user logged in', util.loggedIn);
+        //console.log('No user logged in', util.loggedIn);
         $state.go('main');
       }
     })();
@@ -14,6 +16,7 @@ angular.module('fndParyBoatsApp')
 
 
     $scope.states = constantsService.getStates();
+    
     var curPost = {
       name: "",
       captain: '',
@@ -26,7 +29,8 @@ angular.module('fndParyBoatsApp')
       zipCode:'',
       description:'',
       image:'',
-      distance:0
+      distance:0,
+      featured: false
     };
 
 
@@ -44,37 +48,65 @@ angular.module('fndParyBoatsApp')
       zipCode:'',
       description:'',
       image:'',
-      distance:0
+      distance:0,
+      featured: false
     };
 
-    dbService.getCharterBoat().then(function(data){
-      curPost = angular.copy(data);
-      $scope.charter = data;
-    });
+
+    var fullUser = {};
+    dbService.getFullUser(dbService.getCurrentUser()).then(function(data){
+      fullUser = data;
+      if(data.admin){
+        if(util.previewCharter === null){
+          $scope.charter = util.getCharter();
+          util.setCharter(null);
+        }else{
+          $scope.charter = angular.copy(util.previewCharter);
+          util.previewCharter = null;
+        }
+
+      }else{
+        if(util.previewCharter === undefined || util.previewCharter === null){
+          dbService.getCharterBoat().then(function(data){
+          curPost = angular.copy(data);
+            $scope.charter = data;
+        });
+        }else{
+            $scope.charter = angular.copy(util.previewCharter);
+            util.previewCharter = null;
+      }
+
+      }
+     // $scope.closeMenu(ev);
+   });
+    
 
     $scope.cancelChanges = function(){
       $scope.charter = angular.copy(curPost);
-      //console.log("test", curPost);
     };
 
     $scope.saveChanges = function(){
-      curPost =  angular.copy($scope.charter);
-      dbService.saveCharter($scope.charter);
+      curPost = angular.copy($scope.charter);
+      dbService.saveCharter($scope.charter).then(function(data){
+        if($scope.charter.id === undefined){
+          $scope.charter.id = data;
+        }
+      });
 
       $mdToast.show(
         $mdToast.simple()
-          .textContent('Simple Toast!')
-          .position('bottom right')
-          .hideDelay(2000)
-      );
+        .textContent('Saved!')
+        .position('bottom right')
+        .hideDelay(2000)
+        );
 
     };
 
 
     $scope.previewChanges = function(){
       util.setCharter($scope.charter);
+      util.previewCharter = $scope.charter;
       $state.go('boatProfile');
-      //console.log("Charter Logged", $scope.charter);
     };
 
 
@@ -86,7 +118,6 @@ angular.module('fndParyBoatsApp')
         var reader = new FileReader();
         reader.onload = $scope.imageIsLoaded;
         reader.readAsDataURL(file);
-        console.log("image upload", file);
       }
     };
     $scope.stepsModel = [];

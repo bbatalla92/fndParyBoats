@@ -1,6 +1,6 @@
 <div style="text-align: center">
-  <img hide-xs style="height: 550px; width: 100%" src="../../assets/images/charter2.jpg">
-  <img hide-gt-xs style="height: 300px; width: 100%" src="../../assets/images/charter2.jpg">
+  <img hide-xs style="height: 550px; width: 100%" src="../../assets/images/headerImage.jpg">
+  <img hide-gt-xs style="height: 300px; width: 100%" src="../../assets/images/headerImage.jpg">
 
 </div>
 
@@ -19,48 +19,66 @@
   </form>
 </div>
 <br>
+
 <section class="md-padding" style="text-align: center; background-color: whitesmoke" layout="column">
   <h2 ng-if="featBoats.length > 0" style="margin-top: -2%">Featured Charters</h2>
   <br>
-  <div layout="row" layout-sm="column" layout-xs="column" layout-align="space-between space-between" >
-    <md-card ng-click="featuredClick(x)" flex-xs="80" flex-sm="75"  class="featuredCard  center md-padding" style="margin-top:2%; text-align:center; background-repeat: no-repeat; background-image: url('../../assets/icons/ic_star_black_24px.svg');" ng-repeat="x in featBoats">
-      <md-card-title class="center" layout="column">
-        <h4>{{x.name}}</h4>
-        <h5 style="margin-top: 0"><i>{{x.city}}, {{x.zipCode}}</i></h5>
-      </md-card-title>
-      <br>
+<div layout-gt-xs="row" layout-align-gt-xs="space-between space-between">
+    <md-card  ng-repeat="x in featBoats" ng-click="featuredClick(x)" flex-gt-xs="20" class="md-padding" style="cursor:pointer; margin: 0 auto; ;background-repeat: no-repeat; background-image: url('../../assets/icons/ic_star_black_24px.svg');">
+    <div>
+    <h3 style="margin-top: 0px">{{x.name}}</h3>
+    <h4 style="margin-top: 0px"><i>{{x.city}} {{x.state}}, {{x.zipCode}}</i></h4>
+    </div>
+    <br>
+    <h3 style="margin-top: 0px">Captain:<br/> {{x.captain}}</h3>
+    <br>
       <br>
       Click to View Profile
     </md-card>
   </div>
 
+
+  </div>
 </section>
+<br>
 
-
-<section class="preFooter md-padding" flex style="background-color: whitesmoke">
+<section class="preFooter md-padding" style="background-color: whitesmoke; width: 100%">
   <md-divider style="margin: 0 auto" flex="75"></md-divider>
+
   <br>
-  <div flex="75" class="center"  layout="column" style="margin: 0 auto" >
+  <div class="center"  style="margin: 0 auto; width: 75%" >
 
     <div hide show-gt-sm flex="10"></div>
 
-    <div ng-hide="userFlag" id="" flex="20" flex-sm="80" flex-xs="100">
+    <div>
+      <b>Join our news letter for amazing fishing stories!</b><br>
+      <div layout="row" layout-align="start center">
+        <md-input-container flex="25">
+          <label>Email</label>
+          <input ng-model="newsLetterEmail" type="email" />
+        </md-input-container>
+        <div>
+          <md-button style="background-color: #00d4b4; color: whitesmoke" class="md-raised" ng-click="saveNewsLetterEmail()" ng-disabled ="!newsLetterEmail.includes('@') || !newsLetterEmail.includes('.')" > Join </md-button>
+        </div>
+
+        <p ng-show="emailAddedFlag" style="color: lightgreen" ><b>Added!!!</b></p>
+      </div>
+    </div>
+
+    <div ng-hide="userFlag" >
       <b>Login or Create an Account to add your lisitng, its FREE!</b><br>
       <md-button style="background-color: #00d4b4; color: whitesmoke" class="md-raised" ng-click="openLoginDialog()"> Login </md-button>
     </div>
 
-    <div id="about" flex="45" flex-sm="80" flex-xs="100">
+    <div id="about" >
       <b>About</b><br>
       <p class="aboutText" style="text-align: justify"  >
-        With so much data in the world we believe that “like” information should be easily and conveniently accessible. So we challenged ourselves to create a seamless user experience that gets right down to the point.  We offer the capability to quickly find party boats anywhere in the United States for FREE! We allow you to search an area by zip code or by state.
-        <span hide-xs>  If you love to fish and need to find a group fishing charter boat, then look no further that is what we are here for! Finding you party boats and fishing excursions easily and for free is what we do, providing you with the best possible experience for finding charter boats is how we do it.  You will find that we have the largest national directory
-          of finding party boats in the US!  So if you are looking to find a fun group fishing experience near you, than look no further!...
+        Looking for your next great fishing adventure? We will help you find the closest charter boats in your area!  We streamlined the process of searching through countless pages to find a party boat near you.  Just search by zip code or state and instantly get a list of all the party boats in that area! So if you are looking to find a fun group fishing experience near you, than look no further!...
         </span> <a style="color: black;" ui-sref="about"><b><i>Click to read more!</i></b></a>
       </p>
     </div>
 
-    <div id="social" flex="20" flex-sm="80" flex-xs="100">
-      <b>Follow us on</b><br>
+    <div id="social">
       <div style="float: left;" layout="row">
         <md-icon style="float: left;" md-svg-src="../../assets/icons/facebook-box.svg"></md-icon>
         <md-icon style="float: left;" md-svg-src="../../assets/icons/twitter-box.svg"></md-icon>
@@ -70,3 +88,4 @@
 
   </div>
 </section>
+<br>

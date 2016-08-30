@@ -3,9 +3,19 @@
 
 
 angular.module('fndParyBoatsApp')
-  .controller('aboutCtrl', function($scope){
+  .controller('aboutCtrl', function($scope, dbService){
 
-    $scope.hi = 'hi0';
+        $scope.newsLetterEmail = "";
+        $scope.emailAddedFlag = false; 
+
+
+
+  	$scope.saveNewsLetterEmail = function(){
+        dbService.saveNewsLetterEmail($scope.newsLetterEmail);
+        $scope.newsLetterEmail = "";
+        $scope.emailAddedFlag = true; 
+      }
+
 
 
   });

@@ -4,7 +4,7 @@ angular.module('fndParyBoatsApp')
   .config(function ($stateProvider) {
     $stateProvider
       .state('boatProfile', {
-        url: '/boatProfile',
+        url: '/charter?:id',
         templateUrl: 'app/boatProfile/boatProfile.html',
         controller: 'profileCtrl'
       });

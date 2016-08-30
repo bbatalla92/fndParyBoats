@@ -3,18 +3,29 @@
 (function(){
 
   angular.module('fndParyBoatsApp')
-    .controller('NavbarController', function($scope, util, dbService, $state, $mdMenu, $stateParams){
+  .controller('NavbarController', function($scope, util, dbService, $state, $mdMenu, $stateParams){
 
-      $scope.zip;
-      $scope.$watch(function () {
-        $scope.userFlag = dbService.getCurrentUser();
-
-      });
-      $scope.subheaderFlag = false;
+    $scope.zip;
+    $scope.$watch(function () {
+      $scope.userFlag = dbService.getCurrentUser();
+    });
+    $scope.subheaderFlag = false;
       //$scope.search = search();
 
 
       //====== Functons ======================
+
+      $scope.myPage = function(ev){
+        dbService.getFullUser($scope.userFlag).then(function(data){
+          if(data.admin){
+            $state.go('siteAdmin');
+          }else{
+            $state.go('admin');
+          }
+          $scope.closeMenu(ev);
+        });
+      }
+
 
       $scope.$watch(function () {
 
@@ -55,11 +66,8 @@
 
 
         if($state.current.name === 'searchList'){
-          //console.log('reload',$state.current);
-          //$state.go('searchList');
           $state.transitionTo($state.current, $stateParams, { reload: true, inherit: false, notify: true });
           $scope.$digest();
-
         }else{
           $state.go('searchList');
         }
