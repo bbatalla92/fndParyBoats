@@ -8,7 +8,9 @@
       <input style="float: left" type="file" ng-model-instance onchange="angular.element(this).scope().imageUpload(event)" name="datafile" accept="image/*">
     </div>
     <br>
-    <img ng-if="charter.image" style="width: 100%; height: 20%" ng-src="{{charter.image}}">
+    <div layout="row" layout-align="center center">
+    <img ng-if="charter.image" style="width: 50%; height: 10%" ng-src="{{charter.image}}">
+    </div>
     <br>
 
     <md-input-container>
@@ -69,7 +71,11 @@
     <md-progress-circular md-mode="indeterminate" md-diameter="70"></md-progress-circular>
   </div>
   <br>
-  <div  style="margin-bottom: 20px" layout="row">
+  <div style="height:24px; width:100%">
+  <p ng-if="savedFlag" style="background-color: green; color: white;font-size: 23px;border-radius:20px;opacity:.75">Saved!!</p>
+  </div>
+  <br>
+  <div id="adminActionButtons" style="margin-bottom: 20px" layout="row">
     <md-button ng-hide="true" style="color: whitesmoke;background-color: gold" class="md-raised" ng-click="cancelChanges()">Get Featured!</md-button>
     <span flex></span>
     <md-button class="md-raised md-warn" ng-click="cancelChanges()">Cancel</md-button>

@@ -11,16 +11,16 @@
       <h3 > {{errorDesc}}</h3>
     </div>
     <md-content  style="background: inherit">
-    <div ng-repeat="x in charters">
-    <md-card layout-gt-xs="row" layout-align-gt-xs="space-around" class="md-padding" ng-click="setBoat(x)"  ui-sref="boatProfile">
-    <div>
+    <div ng-repeat="x in charters" style="cursor:pointer">
+    <md-card layout-gt-xs="row" layout-align-gt-xs="space-around" layout-align-xs="center center" class="md-padding" ng-click="setBoat(x)"  ui-sref="boatProfile">
+    <div flex="30" style="text-align:left">
     <h3 style="margin-top: 0px">{{x.name}}</h3>
     <h4 style="margin-top: 0px"><i>{{x.city}} {{x.state}}, {{x.zipCode}}</i></h4>
     </div>
     <h3 style="margin-top: 0px">Captain:<br/> {{x.captain}}</h3>
 
 
-    <h5>{{ x.distance <= 1 ? '< 1': x.distance }} miles away</h5>
+    <h5 ng-show="x.distance > 0">{{ x.distance <= 1 ? '< 1': x.distance }} miles away</h5>
     </md-card>
      
     </div>

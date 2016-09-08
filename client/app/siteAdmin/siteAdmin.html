@@ -1,21 +1,32 @@
 <h2>Site Admin</h2>
+<br>
+<md-button class="md-fab md-primary" style="float: right" ng-click="setBoat({})" ui-sref="admin">
+    <md-icon md-svg-src="../../assets/icons/ic_add_white_24px.svg"></md-icon>
+</md-button>
+<br>
+<div ng-repeat="x in charterList" layout="column" layout-align="space-around space-around">
+    <md-list>
+        <md-card layout="row" layout-xs="column" layout-align="space-around space-around">
+            <md-card-title class="rmvPad" layout="column" flex="40" flex-xs="100">
+                <h3 style="margin-top: 0px">{{x.name}}</h3>
+                <i>{{x.city}} {{x.state}}, {{x.zipCode}}</i>
+            </md-card-title>
+            <md-card-title class="rmvPad" style="text-align: center" flex="25" flex-xs="100">
+                <div style="text-align: center; margin:  auto;">
+                    <h4>Captain</h4>
+                    <h5>{{x.captain}}</h5>
+                </div>
+            </md-card-title>
+            <md-button ng-show="!x.recovered" class="md-raised md-secondary" ng-click="setBoat(x)" ui-sref="admin">
+                Edit Charter
+            </md-button>
+            <md-button ng-show="!x.recovered" class="md-raised md-secondary" ng-click="sendEmail(x)">Send Email
+            </md-button>
+            <h2 ng-show="x.recovered" style="color:green">Recovered</h2>
+        </md-card>
+    </md-list>
 
-<div ng-repeat="x in charterList" layout="column" layout-align="space-around space-around" >
-      <md-card layout="row" layout-xs="column" layout-align="space-around space-around" ng-click="setBoat(x)"  ui-sref="admin">
-        <md-card-title class="rmvPad" layout="column" flex="40" flex-xs="100">
-          <h3 style="margin-top: 0px">{{x.name}}</h3>
-          <i>{{x.city}} {{x.state}}, {{x.zipCode}}</i>
-        </md-card-title>
-        <md-card-title class="rmvPad" style="text-align: center" flex="25" flex-xs="100">
-          <div style="text-align: center; margin:  auto;">
-            <h4>Captain</h4>
-            <h5>{{x.captain}}</h5>
-          </div>
-        </md-card-title>
-        <md-button ng-if="boat.recovered === undefined" class="md-raised" ng-click="sendEmail(x)">Send Email</md-button>
-      </md-card>
-
-    </div>
-    <md-button class="md-fab md-primary" style="float: right" ng-click="setBoat({})"  ui-sref="admin">
-      <md-icon md-svg-src="../../assets/icons/ic_add_white_24px.svg"></md-icon>
-    </md-buttonpx>
+</div>
+<md-button class="md-fab md-primary" style="float: right" ng-click="setBoat({})" ui-sref="admin">
+    <md-icon md-svg-src="../../assets/icons/ic_add_white_24px.svg"></md-icon>
+</md-button>

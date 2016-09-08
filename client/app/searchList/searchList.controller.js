@@ -6,6 +6,7 @@
       // $scope.test = test();
       // Functions initiated
       $scope.setBoat = setBoat;
+      $scope.orderListBy = '';
 
       $scope.loadingFlag = true;
       $scope.noCharterFlag = false;
@@ -25,9 +26,12 @@
 
             zipcodeFlags(util.zipCode);
             $cookies.put('searchKey', util.zipCode);
+            $scope.orderListBy = 'distance';
           } else {
             stateFlags(util.stateSelected);
             $cookies.put('searchKey', util.stateSelected);
+            $scope.orderListBy = null;
+
           }
         }else if($cookies.get('searchKey') != undefined){
           var key = $cookies.get('searchKey');
@@ -58,9 +62,7 @@
       }
 
       function zipcodeFlags(zip){
-
-        $scope.title = zip;//;
-
+        $scope.title = zip;
         dbService.getCharterKeysByZip(zip).then(function (data) {
           $scope.loadingFlag = false;
           if (data == null && $scope.charters.length < 1)

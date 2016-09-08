@@ -12,7 +12,7 @@ angular.module('fndParyBoatsApp', [
     'ngAria',
     'firebase',
     'ngGeolocation',
-    'angularTrix',
+    'angularTrix'
     
   ])
   .config(function($urlRouterProvider, $locationProvider) {

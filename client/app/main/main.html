@@ -1,91 +1,106 @@
 <div style="text-align: center">
-  <img hide-xs style="height: 550px; width: 100%" src="../../assets/images/headerImage.jpg">
-  <img hide-gt-xs style="height: 300px; width: 100%" src="../../assets/images/headerImage.jpg">
+    <img hide-xs style="height: 550px; width: 100%" src="../../assets/images/headerImage.jpg">
+    <img hide-gt-xs style="height: 300px; width: 100%" src="../../assets/images/headerImage.jpg">
 
 </div>
 
 <div style="background-color: whitesmoke; text-align:center; width: 100%;" class=" md-padding">
-  <form class="" >
-    <md-content style="background-color: whitesmoke;overflow: hidden">
-      <md-input-container style="text-align: center; margin-bottom: -1%; ">
-        <label>Zip Code</label>
-        <input type="text" pattern="[0-9]*" class="searchField" maxlength="5" ng-model="zipCode">
-      </md-input-container>
-      <md-button ng-disabled="zipCode.toString().length != 5 " ng-click="search()" class="md-raised" style="height: 4vh; font-size: 2vh; background-color: #00b3ee; color: whitesmoke">Search</md-button>
-    </md-content>
-    <p>or Search by <a ui-sref="states">location</a></p>
-    <div layout="column">
-    </div>
-  </form>
+    <form class="">
+        <md-content style="background-color: whitesmoke;overflow: hidden">
+            <md-input-container style="text-align: center; margin-bottom: -1%; ">
+                <label>Zip Code</label>
+                <input type="text" pattern="[0-9]*" class="searchField" maxlength="5" ng-model="zipCode">
+            </md-input-container>
+            <md-button ng-disabled="zipCode.toString().length != 5 " ng-click="search()" class="md-raised"
+                       style="height: 4vh; font-size: 2vh; background-color: #00b3ee; color: whitesmoke">Search
+            </md-button>
+        </md-content>
+        <p>or Search by <a ui-sref="states">location</a></p>
+
+        <div layout="column">
+        </div>
+    </form>
 </div>
 <br>
 
 <section class="md-padding" style="text-align: center; background-color: whitesmoke" layout="column">
-  <h2 ng-if="featBoats.length > 0" style="margin-top: -2%">Featured Charters</h2>
-  <br>
-<div layout-gt-xs="row" layout-align-gt-xs="space-between space-between">
-    <md-card  ng-repeat="x in featBoats" ng-click="featuredClick(x)" flex-gt-xs="20" class="md-padding" style="cursor:pointer; margin: 0 auto; ;background-repeat: no-repeat; background-image: url('../../assets/icons/ic_star_black_24px.svg');">
-    <div>
-    <h3 style="margin-top: 0px">{{x.name}}</h3>
-    <h4 style="margin-top: 0px"><i>{{x.city}} {{x.state}}, {{x.zipCode}}</i></h4>
+    <h2 ng-if="featBoats.length > 0" style="margin-top: -2%">Featured Charters</h2>
+    <br>
+
+    <div layout-gt-xs="row" layout-align-gt-xs="space-between space-between">
+        <md-card ng-repeat="x in featBoats" ng-click="featuredClick(x)" flex-gt-xs="20" class="md-padding"
+                 style="cursor:pointer; margin: 0 auto; ;background-repeat: no-repeat; background-image: url('../../assets/icons/ic_star_black_24px.svg');">
+            <div>
+                <h3 style="margin-top: 0px">{{x.name}}</h3>
+                <h4 style="margin-top: 0px"><i>{{x.city}} {{x.state}}, {{x.zipCode}}</i></h4>
+            </div>
+            <br>
+
+            <h3 style="margin-top: 0px">Captain:<br/> {{x.captain}}</h3>
+            <br>
+            <br>
+            Click to View Profile
+        </md-card>
     </div>
-    <br>
-    <h3 style="margin-top: 0px">Captain:<br/> {{x.captain}}</h3>
-    <br>
-      <br>
-      Click to View Profile
-    </md-card>
-  </div>
 
 
-  </div>
+    </div>
 </section>
 <br>
+<section class="preFooter md-padding" layout="column" style="background-color: whitesmoke; width: 100%">
+    <md-divider style="margin: 0 auto" flex="75" flex-xs="100"></md-divider>
+    <br>
 
-<section class="preFooter md-padding" style="background-color: whitesmoke; width: 100%">
-  <md-divider style="margin: 0 auto" flex="75"></md-divider>
-
-  <br>
-  <div class="center"  style="margin: 0 auto; width: 75%" >
-
-    <div hide show-gt-sm flex="10"></div>
-
-    <div>
-      <b>Join our news letter for amazing fishing stories!</b><br>
-      <div layout="row" layout-align="start center">
-        <md-input-container flex="25">
-          <label>Email</label>
-          <input ng-model="newsLetterEmail" type="email" />
-        </md-input-container>
+    <div class="center" style="margin: 0 auto; width: 75%">
+        <div hide show-gt-sm flex="10"></div>
         <div>
-          <md-button style="background-color: #00d4b4; color: whitesmoke" class="md-raised" ng-click="saveNewsLetterEmail()" ng-disabled ="!newsLetterEmail.includes('@') || !newsLetterEmail.includes('.')" > Join </md-button>
+            <b>Join our news letter for amazing fishing stories!</b><br>
+
+            <div layout="row" layout-align="start center">
+                <md-input-container flex="25" flex-sm="80" flex-xs="80">
+                    <label>Email</label>
+                    <input ng-model="newsLetterEmail" type="email"/>
+                </md-input-container>
+                <div>
+                    <md-button style="background-color: #00d4b4; color: whitesmoke" class="md-raised"
+                               ng-click="saveNewsLetterEmail()"
+                               ng-disabled="!newsLetterEmail.includes('@') || !newsLetterEmail.includes('.')"> Join
+                    </md-button>
+                </div>
+
+                <p ng-show="emailAddedFlag" style="color: lightgreen"><b>Added!!!</b></p>
+            </div>
         </div>
 
-        <p ng-show="emailAddedFlag" style="color: lightgreen" ><b>Added!!!</b></p>
-      </div>
+        <div ng-hide="userFlag" layout="column" layout-sm="row" layout-xs="row" layout-align-xs="end center">
+            <b>Login or Create an Account to add your lisitng, its FREE!</b><br>
+
+            <div>
+                <md-button style="background-color: #00d4b4; color: whitesmoke" class="md-raised"
+                           ng-click="openLoginDialog()"> Login
+                </md-button>
+            </div>
+        </div>
+        <br/>
+
+        <div id="about">
+            <b>About</b><br>
+
+            <p class="aboutText" style="text-align: justify">
+                Looking for your next great fishing adventure? We will help you find the closest charter boats in your
+                area! We streamlined the process of searching through countless pages to find a party boat near you.
+                Just search by zip code or state and instantly get a list of all the party boats in that area! So if you
+                are looking to find a fun group fishing experience near you, than look no further!...
+                </span> <a style="color: black;" ui-sref="about"><b><i>Click to read more!</i></b></a>
+            </p>
+        </div>
+        <div layout="row" layout-align="start center" layout-align-xs="center center">
+            <md-button ui-sref="contactForm" class="md-raised" style="background-color: #00d4b4;color: white" flex="40">
+                Contact Us
+            </md-button>
+        </div>
+
     </div>
 
-    <div ng-hide="userFlag" >
-      <b>Login or Create an Account to add your lisitng, its FREE!</b><br>
-      <md-button style="background-color: #00d4b4; color: whitesmoke" class="md-raised" ng-click="openLoginDialog()"> Login </md-button>
-    </div>
-
-    <div id="about" >
-      <b>About</b><br>
-      <p class="aboutText" style="text-align: justify"  >
-        Looking for your next great fishing adventure? We will help you find the closest charter boats in your area!  We streamlined the process of searching through countless pages to find a party boat near you.  Just search by zip code or state and instantly get a list of all the party boats in that area! So if you are looking to find a fun group fishing experience near you, than look no further!...
-        </span> <a style="color: black;" ui-sref="about"><b><i>Click to read more!</i></b></a>
-      </p>
-    </div>
-
-    <div id="social">
-      <div style="float: left;" layout="row">
-        <md-icon style="float: left;" md-svg-src="../../assets/icons/facebook-box.svg"></md-icon>
-        <md-icon style="float: left;" md-svg-src="../../assets/icons/twitter-box.svg"></md-icon>
-      </div>
-    </div>
-
-
-  </div>
 </section>
 <br>
