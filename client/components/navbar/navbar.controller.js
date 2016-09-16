@@ -1,77 +1,71 @@
 'use strict';
 
-(function(){
+(function () {
 
-  angular.module('fndParyBoatsApp')
-  .controller('NavbarController', function($scope, util, dbService, $state, $mdMenu, $stateParams){
+    angular.module('fndParyBoatsApp')
+        .controller('NavbarController', ['$scope',  '$state', '$mdMenu', '$stateParams','util', 'dbService', function ($scope, $state, $mdMenu, $stateParams,util, dbService) {
+            $scope.zip = undefined;
+            $scope.$watch(function () {
+                $scope.userFlag = dbService.getCurrentUser();
+            });
 
-    $scope.zip;
-    $scope.$watch(function () {
-      $scope.userFlag = dbService.getCurrentUser();
-    });
-    $scope.subheaderFlag = false;
-      //$scope.search = search();
+            $scope.subheaderFlag = false;
+            //$scope.search = search();
+            //====== Functons ======================
 
-
-      //====== Functons ======================
-
-      $scope.myPage = function(ev){
-        dbService.getFullUser($scope.userFlag).then(function(data){
-          if(data.admin){
-            $state.go('siteAdmin');
-          }else{
-            $state.go('admin');
-          }
-          $scope.closeMenu(ev);
-        });
-      }
+            $scope.myPage = function (ev) {
+                dbService.getFullUser($scope.userFlag).then(function (data) {
+                    if (data.admin) {
+                        $state.go('siteAdmin');
+                    } else {
+                        $state.go('admin');
+                    }
+                    $scope.closeMenu(ev);
+                });
+            };
 
 
-      $scope.$watch(function () {
+            $scope.$watch(function () {
 
-        if( $state.current.url == '/' || $state.current.url == '/admin') {
-          $scope.subheaderFlag = true;
-          return;
-        }
+                if ($state.current.url == '/' || $state.current.url == '/admin') {
+                    $scope.subheaderFlag = true;
+                    return;
+                }
 
-        $scope.subheaderFlag = false;
+                $scope.subheaderFlag = false;
 
-      });
+            });
 
-      $scope.logout = function(ev){
-        dbService.userLogout();
-        $scope.userFlag = false;
-        $state.go('main');
-        $mdMenu.hide();
-      };
+            $scope.logout = function (ev) {
+                dbService.userLogout();
+                $scope.userFlag = false;
+                $state.go('main');
+                $mdMenu.hide();
+            };
 
-      $scope.openMenu = function($mdOpenMenu,ev) {
-        $mdOpenMenu(ev);
-      };
+            $scope.openMenu = function ($mdOpenMenu, ev) {
+                $mdOpenMenu(ev);
+            };
 
-      $scope.closeMenu = function(ev) {
-        $mdMenu.hide();
-      };
-
-      $scope.home = function() {
-        util.charterList = [];
-      };
-
-      $scope.search = function(){
-        //console.log('search', $state.current.url);
-        util.stateSelected = null;
-        util.charterList = [];
-        util.zipCode = $scope.zip;
-        $scope.zip = '';
-
-
-        if($state.current.name === 'searchList'){
-          $state.transitionTo($state.current, $stateParams, { reload: true, inherit: false, notify: true });
-          $scope.$digest();
-        }else{
-          $state.go('searchList');
-        }
-      }
-    });
+            $scope.closeMenu = function (ev) {
+                $mdMenu.hide();
+            };
+            $scope.home = function () {
+                util.charterList = [];
+            };
+            $scope.search = function () {
+                //console.log('search', $state.current.url);
+                util.stateSelected = null;
+                util.charterList = [];
+                util.zipCode = $scope.zip;
+                $scope.zip = '';
+                if ($state.current.name === 'searchList') {
+                    $state.transitionTo($state.current, $stateParams, { reload: true, inherit: false, notify: true });
+                    $scope.$digest();
+                } else {
+                    $state.go('searchList');
+                }
+            }
+        }]);
 
 })();

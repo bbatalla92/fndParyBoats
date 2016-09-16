@@ -21,6 +21,7 @@
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
   <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
   <link rel="stylesheet" href="bower_components/trix/dist/trix.css" />
+  <link rel="stylesheet" href="bower_components/angular-material-data-table/dist/md-data-table.css" />
   <!-- endbower -->
   <!-- endbuild -->
   <!-- build:css({.tmp,client}) app/app.css -->
@@ -44,7 +45,6 @@
   -->
   <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
   <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
-  <link rel="stylesheet" href="components/navbar/navbar.css">
   <link href='https://fonts.googleapis.com/css?family=Alegreya+Sans:400,800' rel='stylesheet' type='text/css'>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkDhfBJEjsAG_Ar12ZEO76w1UT-BKpe_s"
           type="text/javascript"></script>
@@ -72,16 +72,7 @@
 
 <!--Firebase Code-->
 <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
-<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyCkDhfBJEjsAG_Ar12ZEO76w1UT-BKpe_s",
-    authDomain: "findpartyboat.firebaseapp.com",
-    databaseURL: "https://findpartyboat.firebaseio.com",
-    storageBucket: "findpartyboat.appspot.com"
-  };
-  firebase.initializeApp(config);
-</script>
+
 
 
 
@@ -124,13 +115,16 @@
 <script src="bower_components/ngQuill/src/ng-quill.min.js"></script>
 <script src="bower_components/trix/dist/trix.js"></script>
 <script src="bower_components/angular-trix/dist/angular-trix.js"></script>
+<script src="bower_components/ngmap/build/scripts/ng-map.js"></script>
+<script src="bower_components/angular-material-data-table/dist/md-data-table.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 <!-- build:js(.tmp) app/app.js -->
 <script src="app/app.js"></script>
 <!-- injector:js -->
-<script src="app/main/main.js"></script>
-<script src="app/about/about.controller.js"></script>
+<script src="app/searchList/searchList.controller.js"></script>
+<script src="Dialogs/loginDialog/loginDialog.js"></script>
+<script src="app/about/about.js"></script>
 <script src="app/admin/admin.controller.js"></script>
 <script src="app/admin/admin.js"></script>
 <script src="app/app.constant.js"></script>
@@ -139,8 +133,8 @@
 <script src="app/contactForm/contactForm.controller.js"></script>
 <script src="app/contactForm/contactForm.js"></script>
 <script src="app/main/main.controller.js"></script>
-<script src="app/about/about.js"></script>
-<script src="app/searchList/searchList.controller.js"></script>
+<script src="app/main/main.js"></script>
+<script src="app/about/about.controller.js"></script>
 <script src="app/searchList/searchList.js"></script>
 <script src="app/siteAdmin/siteAdmin.controller.js"></script>
 <script src="app/siteAdmin/siteAdmin.js"></script>
@@ -149,12 +143,12 @@
 <script src="components/footer/footer.directive.js"></script>
 <script src="components/navbar/navbar.controller.js"></script>
 <script src="components/navbar/navbar.directive.js"></script>
+<script src="services/constantsService/constants.js"></script>
+<script src="services/dbService/dbService.js"></script>
+<script src="services/util/util.service.js"></script>
 <!-- endinjector -->
 <!-- endbuild -->
-<script src="services/util/util.service.js"></script>
-<script src="services/dbService/dbService.js"></script>
-<script src="services/constantsService/constants.js"></script>
-<script src="Dialogs/loginDialog/loginDialog.js"></script>
+
 
 
 </body>

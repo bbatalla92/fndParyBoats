@@ -1,15 +1,15 @@
 'use strict';
 
 angular.module('fndParyBoatsApp')
-  .config(function ($stateProvider, $urlRouterProvider) {
+  .config(['$stateProvider',function ($stateProvider) {
     $stateProvider
       .state('searchList', {
-        url: '/search?:state',
+        url: '/search/:crit',
         templateUrl: 'app/searchList/searchList.html',
         controller: 'searchCtrl',
-        reload: true,
+        reload: true
         
       });
 
       
-  });
+  }]);

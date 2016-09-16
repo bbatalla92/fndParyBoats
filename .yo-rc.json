@@ -37,7 +37,7 @@
     "directiveDirectory": "client/app/",
     "componentDirectory": "client/app/components/",
     "filterDirectory": "client/app/",
-    "serviceDirectory": "client/app/",
+    "serviceDirectory": "client/app/services",
     "basePath": "client",
     "moduleName": "",
     "modulePrompt": true,

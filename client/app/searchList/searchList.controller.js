@@ -1,98 +1,90 @@
 'use strict';
-(function(){
+(function () {
 
-  angular.module('fndParyBoatsApp')
-    .controller('searchCtrl', function($scope, util, dbService, $cookies, $stateParams) {
-      // $scope.test = test();
-      // Functions initiated
-      $scope.setBoat = setBoat;
-      $scope.orderListBy = '';
+    angular.module('fndParyBoatsApp')
+        .controller('searchCtrl', ['$scope', 'util', 'dbService', '$cookies','$state', function ($scope, util, dbService, $cookies, $state) {
+            // $scope.test = test();
+            // Functions initiated
+            $scope.setBoat = setBoat;
+            $scope.orderListBy = '';
 
-      $scope.loadingFlag = true;
-      $scope.noCharterFlag = false;
-      $scope.title = '';
+            $scope.loadingFlag = true;
+            $scope.noCharterFlag = false;
+            $scope.title = '';
 
-      $scope.errorDesc = 'Sorry, no party boats in your area.  If you know of any, tell them about our site!'
-
-
-      // Data variables
-      $scope.charters = util.charterList;
-      if($scope.charters.length < 1) {
+            $scope.errorDesc = 'Sorry, no party boats in your area.  If you know of any, tell them about our site!'
 
 
-        if(util.zipCode != null || util.stateSelected != null ) {
-
-          if (util.stateSelected == null) {
-
-            zipcodeFlags(util.zipCode);
-            $cookies.put('searchKey', util.zipCode);
-            $scope.orderListBy = 'distance';
-          } else {
-            stateFlags(util.stateSelected);
-            $cookies.put('searchKey', util.stateSelected);
-            $scope.orderListBy = null;
-
-          }
-        }else if($cookies.get('searchKey') != undefined){
-          var key = $cookies.get('searchKey');
-          if(key.length === 2){
-            stateFlags(key);
-          }else{
-            zipcodeFlags(key);
-          }
-        }
-        else{
-          $scope.loadingFlag = false;
-          $scope.noCharterFlag = true;
-          $scope.errorDesc = 'Sorry, please try searching again.'
-        }
+            // Data variables
+            $scope.charters = util.charterList;
+            if ($scope.charters.length < 1) {
 
 
-      }else{
-        $scope.loadingFlag = false;
-      }
+                if (util.zipCode != null || util.stateSelected != null) {
 
-      //=========functions ==============================================
-      $scope.test = function(){
-        console.log('test');
-      };
+                    if (util.stateSelected == null) {
 
-      function setBoat(charter){
-        util.setCharter(charter);
-      }
+                        zipcodeFlags(util.zipCode);
+                        $cookies.put('searchKey', util.zipCode);
+                        $scope.orderListBy = 'distance';
+                    } else {
+                        stateFlags(util.stateSelected);
+                        $cookies.put('searchKey', util.stateSelected);
+                        $scope.orderListBy = null;
 
-      function zipcodeFlags(zip){
-        $scope.title = zip;
-        dbService.getCharterKeysByZip(zip).then(function (data) {
-          $scope.loadingFlag = false;
-          if (data == null && $scope.charters.length < 1)
-            $scope.noCharterFlag = true;
-          else {
-            $scope.charters = data;
-            util.charterList = data;
-          }
-        });
+                    }
+                } else if ($cookies.get('searchKey') != undefined) {
+                    var key = $cookies.get('searchKey');
+                    if (key.length === 2) {
+                        stateFlags(key);
+                    } else {
+                        zipcodeFlags(key);
+                    }
+                }
+                else {
+                    $scope.loadingFlag = false;
+                    $scope.noCharterFlag = true;
+                    $scope.errorDesc = 'Sorry, please try searching again.'
+                }
+            } else {
+                $scope.loadingFlag = false;
+            }
+
+            //=========functions ==============================================
+            $scope.test = function () {
+                console.log('test');
+            };
+
+            function setBoat(charter) {
+                util.setCharter(charter);
+                var i = charter.id.slice(1);
+                $state.go('boatProfile',{id:i});
+            }
+
+            function zipcodeFlags(zip) {
+                $scope.title = zip;
+                dbService.getCharterKeysByZip(zip).then(function (data) {
+                    $scope.loadingFlag = false;
+                    if (data == null && $scope.charters.length < 1)
+                        $scope.noCharterFlag = true;
+                    else {
+                        $scope.charters = data;
+                        util.charterList = data;
+                    }
+                });
+            }
+
+            function stateFlags(state) {
+                $scope.title = state;
+                dbService.getChartersByState(state).then(function (data) {
+                    $scope.charters = data;
+                    $scope.loadingFlag = false;
+                    util.charterList = data;
+                });
+            }
 
 
-      }
-
-      function stateFlags(state){
-        $scope.title = state;
-        dbService.getChartersByState(state).then(function (data) {
-          $scope.charters = data;
-          $scope.loadingFlag = false;
-          util.charterList = data;
-        });
-      }
-
-
-
-
-
-
-
-
-    })
+        }])
 
 
 })();

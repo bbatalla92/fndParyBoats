@@ -33,6 +33,8 @@ module.exports = function(config) {
       'client/bower_components/ngQuill/src/ng-quill.min.js',
       'client/bower_components/trix/dist/trix.js',
       'client/bower_components/angular-trix/dist/angular-trix.js',
+      'client/bower_components/ngmap/build/scripts/ng-map.js',
+      'client/bower_components/angular-material-data-table/dist/md-data-table.js',
       'client/bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'client/app/app.js',

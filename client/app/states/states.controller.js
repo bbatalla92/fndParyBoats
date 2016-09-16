@@ -4,7 +4,7 @@
 
 
 angular.module('fndParyBoatsApp')
-  .controller('locationCtrl', function(constantsService, $scope, util, dbService, $state){
+  .controller('locationCtrl', ['constantsService', '$scope', 'util', 'dbService', '$state',function(constantsService, $scope, util, dbService, $state){
 
     $scope.states = [];
     $scope.loadingFlag = true;
@@ -18,10 +18,10 @@ angular.module('fndParyBoatsApp')
     $scope.stateSelected = function(stat){
       util.charterList = [];
       util.stateSelected = stat;
-      $state.go('searchList')
+      $state.go('searchList',{crit: stat});
     }
 
 
-  });
+  }]);
 
 })();

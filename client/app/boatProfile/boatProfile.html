@@ -1,35 +1,115 @@
-
-
-
 <section class="md-padding" style="margin: 0 auto; text-align: center" flex="50" flex-sm="80" flex-xs="100">
-  <div ng-show="loadingFlag" style="z-index: 10; position: absolute; top: 30%; left: 50%; margin-left: -50px" layout="row" layout-sm="column" layout-align="space-around">
-    <md-progress-circular md-mode="indeterminate" md-diameter="100"></md-progress-circular>
-  </div>
-  <div ng-hide="loadingFlag" layout-gt-xs="row">
-    <div flex="50" flex-xs="100">
-      <img class="centerImg" style="width: 100%; height: 100%" ng-src={{charter.image}} />
+    <div ng-show="loadingFlag" style="z-index: 10; position: absolute; top: 30%; left: 50%; margin-left: -50px"
+         layout="row" layout-sm="column" layout-align="space-around">
+        <md-progress-circular md-mode="indeterminate" md-diameter="100"></md-progress-circular>
     </div>
-    <div class="centerText" flex="50" flex-xs="100">
-      <h1> <b>{{charter.name.toUpperCase()}}</b></h1>
-      <h3>Captain <b>{{charter.captain}}</b></h3>
-      <h4> <i>{{charter.street}}, {{charter.city}} {{charter.state}}, {{charter.zipCode}}</i></h4>
-      <h5>Website: <a href="http://{{charter.website}}" target="_blank" ng-click="">{{charter.website}}</a></h5>
-      <h5>Phone Number: {{charter.phoneNumber}}</h5>
+    <div ng-hide="loadingFlag" layout-gt-xs="row">
+        <div flex="50" flex-xs="100">
+            <img class="centerImg" style="width: 100%; height: 100%" ng-src="{{charter.image}}"/>
 
+        </div>
+        <div class="centerText" flex="50" flex-xs="100">
+            <h1><b>{{charter.name.toUpperCase()}}</b></h1>
+
+            <h3>Captain <b>{{charter.captain}}</b></h3>
+            <h4><i>{{charter.street}}, {{charter.city}} {{charter.state}}, {{charter.zipCode}}</i></h4>
+            <h5>Website: <a href="http://{{charter.website}}" target="_blank" ng-click="">{{charter.website}}</a></h5>
+            <h5>Phone Number: {{charter.phoneNumber}}</h5>
+        </div>
     </div>
-  </div>
+    <br/>
+    <br/>
+    <md-tabs ng-hide="loadingFlag" md-dynamic-height>
+        <md-tab ng-if="charter.displayGeneralInfo" label="General Info">
+            <md-tab-body>
+                <section>
+                    <table md-table>
+                        <tbody md-body>
+                        <tr md-row>
+                            <td md-cell>Boating Season</td>
+                            <td md-cell>
+                                <ul>
+                                <li ng-if="!charter.boatSeason.allYear" style="list-style: none"><b>{{charter.boatSeason.startMonth}}</b> to <b>{{charter.boatSeason.endMonth}}</b></li>
+                                <li ng-if="charter.boatSeason.allYear" style="list-style: none"><b>{{charter.boatSeason.allYear ? 'Year Round':'Not Year Round'}}</b></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr md-row>
+                            <td md-cell>Reservation Required?</i></td>
+                            <td md-cell>
+                                <ul>
+                                    <li style="list-style: none"><b>{{charter.reservationRequired ? 'Yes':'No'}}</b></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr ng-if="charter.rates" md-row>
+                            <td md-cell>Rates</td>
+                            <td md-cell>
+                                <ul ng-repeat="rate in charter.rates">
+                                    <li><b>{{rate.name}}</b>: {{rate.price}}</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr md-row ng-if="charter.departureTimes">
+                            <td md-cell>Departure Times and Length</td>
+                            <td md-cell>
+                                <ul ng-repeat="time in charter.departureTimes">
+                                    <li>{{time.time}} {{time.ampm}}</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr md-row ng-if="charter.onboardServices">
+                            <td md-cell>Onboard Services</td>
+                            <td md-cell>
+                                <ul>
+                                    <li ng-repeat="service in charter.onboardServices">{{service.name}}</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr md-row ng-if="charter.additionalServices">
+                            <td md-cell>Additional Servicess</td>
+                            <td md-cell>
+                                <ul>
+                                    <li ng-repeat="service in charter.additionalServices">{{service.name}}</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div>
+                        <h4></h4>
 
-  <br>
-  <br>
+                    </div>
+                </section>
 
-  <div class="trix-content" style="text-align: justify" ng-bind-html="charter.description"></div>
+            </md-tab-body>
+        </md-tab>
+        <md-tab label="About">
+            <md-tab-body>
+                <div class="trix-content" style="text-align: justify" ng-bind-html="charter.description"></div>
+            </md-tab-body>
+        </md-tab>
+        <md-tab label="Map">
+            <div style="width: 75%; margin: 0 auto" map-lazy-load="https://maps.google.com/maps/api/js"
+                 map-lazy-load-params="{{mapUrl}}">
+                <ng-map center="{{charter.location.lat+','+charter.location.long}}" zoom="11">
+                    <marker position="[{{charter.location.lat+','+charter.location.long}}]" title="hello"></marker>
+                </ng-map>
+            </div>
+        </md-tab>
+
+    </md-tabs>
+    <br/>
+    <md-divider></md-divider>
+    <br>
 
 
 </section>
 
-<div ng-hide="previewMode == false" flex style="background-color: #dddd00; opacity: .5; position: fixed; width: 100%" layout="row">
-  <div style="margin: 0 auto">
-    <md-button ng-click="previewBack()" class="md-raised md-primary">Back</md-button>
-    <md-button ng-click="previewSave()" class="md-raised md-warned">Save</md-button>
-  </div>
+<div  ng-hide="previewMode == false" flex style="background-color: #dddd00; opacity: .5; position: fixed; width: 100%"
+     layout="row">
+    <div style="margin: 0 auto">
+        <md-button ng-click="previewBack()" class="md-raised md-primary">Back</md-button>
+        <md-button ng-click="previewSave()" class="md-raised md-warned">Save</md-button>
+    </div>
 </div>

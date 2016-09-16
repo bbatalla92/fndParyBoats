@@ -6,7 +6,7 @@
  (function(){
 
   angular.module('fndParyBoatsApp')
-  .controller('loginCtrl', function($scope, dbService, $mdDialog, $state, util, createAccount, charterID){
+  .controller('loginCtrl',['$scope', 'dbService', '$mdDialog', '$state', 'util', 'createAccount', 'charterID', function($scope, dbService, $mdDialog, $state, util, createAccount, charterID){
 
     if(createAccount){
       newUser();
@@ -99,7 +99,7 @@
 
 
 
-  });
+  }]);
 
 
 })();

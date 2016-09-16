@@ -44,12 +44,12 @@
 
                 <div>
                     <textarea style="width:100%;resize:vertical; height: 300px" name="body" ng-model="contact.body"
-                              placeholder="Body" required minlength="10">
+                              placeholder="Message" required minlength="10">
                     </textarea>
 
                     <div ng-messages="contactForm.body.$error" role="alert">
                         <div ng-message-exp="['required', 'minlength']">
-                            Your email must be between 10 and 60 characters long.
+                            Your message must be greater than 10 characters long.
                         </div>
                     </div>
                 </div>

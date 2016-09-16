@@ -1,83 +1,89 @@
 'use strict';
-(function(){
+(function () {
 
-  angular.module('fndParyBoatsApp')
-  .controller('profileCtrl', function($scope, util, $cookies, $state, dbService, $mdToast, $stateParams, $mdDialog){
-    $scope.loadingFlag = false;
-  //  console.log('boat id', $stateParams);
+    angular.module('fndParyBoatsApp')
+        .controller('profileCtrl', ['$scope', 'util', '$cookies', '$state', 'dbService', '$mdToast', '$stateParams', '$mdDialog', function ($scope, util, $cookies, $state, dbService, $mdToast, $stateParams, $mdDialog) {
+            $scope.loadingFlag = false;
+            $scope.mapUrl = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyD7gE6eRHVSSO5ZVNoM2eNkElHp-Rig1jg';
+            //  console.log('boat id', $stateParams);
+            $scope.center = '';
 
-  if(util.previewCharter != null){
-    $scope.previewMode = true;
-    util.previewCharter = null;
-  }else{
-    $scope.previewMode = false;
-  }
+            if (util.previewCharter != null) {
+                $scope.previewMode = true;
+                util.previewCharter = null;
+            } else {
+                $scope.previewMode = false;
+            }
 
 // ===============  Getting Charter ===========================================================
-$scope.loadingFlag = true;
-if($stateParams.id === undefined){
-  if(util.getCharter() === undefined || util.getCharter() === null){
-    if($cookies.get('charter') === undefined || $cookies.get('charter') === null){
-      // No Charter Available, going to home screen
-      $state.go('main');
-    }else{
-      // Getting Charter from cookies
-      dbService.getCharterByID($cookies.get('charter')).then(function(data){
-        $scope.loadingFlag = false;
-        $scope.charter = data;
-      });
-    }
-  }else{
-    // Charter is set in util service
-    $scope.charter = util.getCharter();
-    $scope.loadingFlag = false;
-    util.setCharter(null);
-    $cookies.put('charter', $scope.charter.id);
+            $scope.loadingFlag = true;
+            console.log('state',$state);
+            getCharter();
 
-  }
-}else{
-      // The charter ID is in the URL
-      dbService.getCharterByID($stateParams.id).then(function(charter){
-        $scope.charter = charter;
-        $scope.loadingFlag = false;
+            function getCharter(){
 
-        
-        if(charter.fosterID != undefined){
-          $mdDialog.show({
-            controller: 'loginCtrl',
-            templateUrl: '../../Dialogs/loginDialog/loginDialog.html',
-            parent: angular.element(document.body),
-            locals : {
-              createAccount : true,
-              charterID: charter.id
-            }, 
-            clickOutsideToClose: true
+                if($state.params.id.charAt(0) === '-' ){
+                    getCharterFromService($state.params.id, true);
+                }else{
+                    if(util.getCharter() != undefined){
+                        $scope.loadingFlag = false;
+                        $scope.charter = util.getCharter();
+                    }else{
+                        var str = '-' + $state.params.id.toString();
+                        getCharterFromService(str, false);
+                    }
+                }
 
-          });
-        }
+            }
 
-      })
-    }
-    
-// ===================================================================================
+            function getCharterFromService(id, newCharter){
+                console.log('id',id);
 
-$scope.previewBack = function(){
-  //$cookies.set('charter', );
-  util.previewCharter = $scope.charter;
-  $state.go('admin');
-}
+                dbService.getCharterByID(id).then(function (charter) {
+                    console.log('charter',charter);
+                    $scope.charter = charter;
+                    $scope.loadingFlag = false;
+                    if (charter.fosterID != undefined && newCharter) {
+                        displayDialog(id);
+                    }
 
-$scope.previewSave = function(){
-  dbService.saveCharter($scope.charter);
+                });
+            }
 
-  $mdToast.show(
-    $mdToast.simple()
-    .textContent('Saved!')
-    .position('bottom right')
-    .hideDelay(2000)
-    );
-  $state.go('admin');
-}
+            function displayDialog(id){
+                $mdDialog.show({
+                    controller: 'loginCtrl',
+                    templateUrl: '../../Dialogs/loginDialog/loginDialog.html',
+                    parent: angular.element(document.body),
+                    locals: {
+                        createAccount: true,
+                        charterID: id
+                    },
+                    clickOutsideToClose: true
+
+                });
+            }
 
 
-});})();
+// ========================== Editing Mode =========================================================
+            $scope.previewBack = function () {
+                //$cookies.set('charter', );
+                util.previewCharter = $scope.charter;
+                $state.go('admin');
+            };
+
+            $scope.previewSave = function () {
+                dbService.saveCharter($scope.charter);
+
+                $mdToast.show(
+                    $mdToast.simple()
+                        .textContent('Saved!')
+                        .position('bottom right')
+                        .hideDelay(2000)
+                );
+                $state.go('admin');
+            }
+
+
+        }]);
+})();

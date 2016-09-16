@@ -11,8 +11,8 @@
                 <label>Zip Code</label>
                 <input type="text" pattern="[0-9]*" class="searchField" maxlength="5" ng-model="zipCode">
             </md-input-container>
-            <md-button ng-disabled="zipCode.toString().length != 5 " ng-click="search()" class="md-raised"
-                       style="height: 4vh; font-size: 2vh; background-color: #00b3ee; color: whitesmoke">Search
+            <md-button ng-disabled="zipCode.toString().length != 5 " ng-click="search()" class="md-raised md-primary md-hue-1"
+                       style="height: 4vh; font-size: 2vh; color: whitesmoke">Search
             </md-button>
         </md-content>
         <p>or Search by <a ui-sref="states">location</a></p>
@@ -54,7 +54,7 @@
     <div class="center" style="margin: 0 auto; width: 75%">
         <div hide show-gt-sm flex="10"></div>
         <div>
-            <b>Join our news letter for amazing fishing stories!</b><br>
+            <b>Join our news letter for amazing fishing stories and the chance to win a FREE T-Shirt! </b><br>
 
             <div layout="row" layout-align="start center">
                 <md-input-container flex="25" flex-sm="80" flex-xs="80">
@@ -84,7 +84,7 @@
         <br/>
 
         <div id="about">
-            <b>About</b><br>
+            <b><a  ui-sref="about">About</a></b><br>
 
             <p class="aboutText" style="text-align: justify">
                 Looking for your next great fishing adventure? We will help you find the closest charter boats in your

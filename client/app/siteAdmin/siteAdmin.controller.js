@@ -2,7 +2,7 @@
 (function(){
 
 	angular.module('fndParyBoatsApp')
-	.controller('siteAdminCtrl', function($scope, util, dbService, $state){
+	.controller('siteAdminCtrl', ['$scope', 'util', 'dbService',function($scope, util, dbService){
 
 		var user = dbService.getCurrentUser();
 
@@ -20,11 +20,11 @@
 
 		$scope.setBoat = function(charter){
 			util.setCharter(charter);
-		}
+		};
 
 		$scope.sendEmail = function(boat){
 			dbService.sendNewCharterEmail(boat);
 		}
 
 
-	});})();
+	}]);})();

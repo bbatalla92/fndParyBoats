@@ -1,7 +1,7 @@
 'use strict';
 (function () {
     angular.module('fndParyBoatsApp')
-        .controller('contactFormCtrl', function ($scope, dbService, $timeout) {
+        .controller('contactFormCtrl',['$scope', 'dbService', '$timeout', function ($scope, dbService, $timeout) {
             var contactDefault =
             {
                 name: "",
@@ -23,6 +23,6 @@
 
             }
 
-        });
+        }]);
 
 })();

@@ -5,15 +5,9 @@
 
 (function () {
     angular.module('fndParyBoatsApp')
-        .factory('dbService', function ($q, util, $state) {
+        .factory('dbService',['$q', 'util', '$state', function ($q, util, $state) {
             var rootRef = new Firebase('https://findpartyboat.firebaseio.com/');
-            var config = {
-                apiKey: "AIzaSyCkDhfBJEjsAG_Ar12ZEO76w1UT-BKpe_s",
-                authDomain: "findpartyboat.firebaseapp.com",
-                databaseURL: "https://findpartyboat.firebaseio.com",
-                storageBucket: "findpartyboat.appspot.com"
-            };
-            firebase.initializeApp(config);
+
             var geoFire = new GeoFire(rootRef.child('GeoFire'));
             // Get a reference to the storage service, which is used to create references in your storage bucket
             var storage = firebase.storage();
@@ -420,6 +414,6 @@
                 saveNewsLetterEmail: saveNewsLetterEmail,
                 sendContactUsEmail:sendContactUsEmail
             };
-        });
+        }]);
 
 })();

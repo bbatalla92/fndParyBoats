@@ -3,7 +3,7 @@
 
 
 angular.module('fndParyBoatsApp')
-  .controller('aboutCtrl', function($scope, dbService){
+  .controller('aboutCtrl', ['$scope', 'dbService',function($scope, dbService){
 
         $scope.newsLetterEmail = "";
         $scope.emailAddedFlag = false; 
@@ -18,6 +18,6 @@ angular.module('fndParyBoatsApp')
 
 
 
-  });
+  }]);
 
 })();

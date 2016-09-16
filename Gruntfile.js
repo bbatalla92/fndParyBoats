@@ -57,7 +57,7 @@ module.exports = function(grunt) {
     },
     watch: {
       babel: {
-        files: ['<%= yeoman.client %>/{app,components}/**/!(*.spec|*.mock).js'],
+        files: ['<%= yeoman.client %>/{app,components,Dialogs,services}/**/!(*.spec|*.mock).js'],
         tasks: ['newer:babel:client']
       },
       ngconstant: {
@@ -66,13 +66,13 @@ module.exports = function(grunt) {
       },
       injectJS: {
         files: [
-          '<%= yeoman.client %>/{app,components}/**/!(*.spec|*.mock).js',
+          '<%= yeoman.client %>/{app,components,Dialogs,services}/**/!(*.spec|*.mock).js',
           '!<%= yeoman.client %>/app/app.js'
         ],
         tasks: ['injector:scripts']
       },
       injectCss: {
-        files: ['<%= yeoman.client %>/{app,components}/**/*.css'],
+        files: ['<%= yeoman.client %>/{app,components,Dialogs,services}/**/*.css'],
         tasks: ['injector:css']
       },
       mochaTest: {
@@ -80,7 +80,7 @@ module.exports = function(grunt) {
         tasks: ['env:test', 'mochaTest']
       },
       jsTest: {
-        files: ['<%= yeoman.client %>/{app,components}/**/*.{spec,mock}.js'],
+        files: ['<%= yeoman.client %>/{app,components,Dialogs,services}/**/*.{spec,mock}.js'],
         tasks: ['newer:jshint:all', 'wiredep:test', 'karma']
       },
       gruntfile: {
@@ -88,9 +88,9 @@ module.exports = function(grunt) {
       },
       livereload: {
         files: [
-          '{.tmp,<%= yeoman.client %>}/{app,components}/**/*.{css,html}',
-          '{.tmp,<%= yeoman.client %>}/{app,components}/**/!(*.spec|*.mock).js',
-          '<%= yeoman.client %>/assets/images/{,*//*}*.{png,jpg,jpeg,gif,webp,svg}'
+          '{.tmp,<%= yeoman.client %>}/{app,components,Dialogs,services}/**/*.{css,html}',
+          '{.tmp,<%= yeoman.client %>}/{app,components,Dialogs,services}/**/!(*.spec|*.mock).js',
+          '<%= yeoman.client %>/assets/{,*//*}*.{png,jpg,jpeg,gif,webp,svg}'
         ],
         options: {
           livereload: true
@@ -107,7 +107,7 @@ module.exports = function(grunt) {
       bower: {
         files: ['bower.json'],
         tasks: ['wiredep']
-      },
+      }
     },
 
     // Make sure code styles are up to par and there are no obvious mistakes
@@ -128,9 +128,9 @@ module.exports = function(grunt) {
         },
         src: ['<%= yeoman.server %>/**/*.{spec,integration}.js']
       },
-      all: ['<%= yeoman.client %>/{app,components}/**/!(*.spec|*.mock|app.constant).js'],
+      all: ['<%= yeoman.client %>/{app,components,Dialogs,services}/**/!(*.spec|*.mock|app.constant).js'],
       test: {
-        src: ['<%= yeoman.client %>/{app,components}/**/*.{spec,mock}.js']
+        src: ['<%= yeoman.client %>/{app,components,Dialogs,services}/**/*.{spec,mock}.js']
       }
     },
 
@@ -226,7 +226,7 @@ module.exports = function(grunt) {
       },
       client: {
         src: '<%= yeoman.client %>/index.html',
-        ignorePath: '<%= yeoman.client %>/',
+        ignorePath: '<%= yeoman.client %>/'
       },
       test: {
         src: './karma.conf.js',
@@ -239,7 +239,7 @@ module.exports = function(grunt) {
       dist: {
         src: [
           '<%= yeoman.dist %>/<%= yeoman.client %>/!(bower_components){,*/}*.{js,css}',
-          '<%= yeoman.dist %>/<%= yeoman.client %>/assets/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+          '<%= yeoman.dist %>/<%= yeoman.client %>/assets/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
       }
     },
@@ -262,15 +262,15 @@ module.exports = function(grunt) {
       options: {
         assetsDirs: [
           '<%= yeoman.dist %>/<%= yeoman.client %>',
-          '<%= yeoman.dist %>/<%= yeoman.client %>/assets/images'
+          '<%= yeoman.dist %>/<%= yeoman.client %>/assets'
         ],
         // This is so we update image references in our ng-templates
         patterns: {
           css: [
-            [/(assets\/images\/.*?\.(?:gif|jpeg|jpg|png|webp|svg))/gm, 'Update the CSS to reference our revved images']
+            [/(assets\/.*?\.(?:gif|jpeg|jpg|png|webp|svg))/gm, 'Update the CSS to reference our revved images']
           ],
           js: [
-            [/(assets\/images\/.*?\.(?:gif|jpeg|jpg|png|webp|svg))/gm, 'Update the JS to reference our revved images']
+            [/(assets\/.*?\.(?:gif|jpeg|jpg|png|webp|svg))/gm, 'Update the JS to reference our revved images']
           ]
         }
       }
@@ -281,16 +281,17 @@ module.exports = function(grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%= yeoman.client %>/assets/images',
+          cwd: '<%= yeoman.client %>/assets',
           src: '{,*/}*.{png,jpg,jpeg,gif,svg}',
-          dest: '<%= yeoman.dist %>/<%= yeoman.client %>/assets/images'
-        }]
+          dest: '<%= yeoman.dist %>/<%= yeoman.client %>/assets'
+        },]
       }
     },
 
     // Allow the use of non-minsafe AngularJS files. Automatically makes it
     // minsafe compatible so Uglify does not destroy the ng references
     ngAnnotate: {
+
       dist: {
         files: [{
           expand: true,
@@ -338,12 +339,12 @@ module.exports = function(grunt) {
       },
       main: {
         cwd: '<%= yeoman.client %>',
-        src: ['{app,components}/**/*.html'],
+        src: ['{app,components,Dialogs,services}/**/*.html'],
         dest: '.tmp/templates.js'
       },
       tmp: {
         cwd: '.tmp',
-        src: ['{app,components}/**/*.html'],
+        src: ['{app,components,Dialogs,services}/**/*.html'],
         dest: '.tmp/tmp-templates.js'
       }
     },
@@ -368,13 +369,13 @@ module.exports = function(grunt) {
             '.htaccess',
             'bower_components/**/*',
             'assets/images/{,*/}*.{webp}',
-            'assets/fonts/**/*',
+            'assets/icons/**/*',
             'index.html'
           ]
         }, {
           expand: true,
           cwd: '.tmp/images',
-          dest: '<%= yeoman.dist %>/<%= yeoman.client %>/assets/images',
+          dest: '<%= yeoman.dist %>/<%= yeoman.client %>/assets',
           src: ['generated/*']
         }, {
           expand: true,
@@ -390,7 +391,7 @@ module.exports = function(grunt) {
         expand: true,
         cwd: '<%= yeoman.client %>',
         dest: '.tmp/',
-        src: ['{app,components}/**/*.css']
+        src: ['{app,components,Dialogs,services}/**/*.css']
       }
     },
 
@@ -422,10 +423,10 @@ module.exports = function(grunt) {
         'ngconstant'
       ],
       server: [
-        'newer:babel:client',
+        'newer:babel:client'
       ],
       test: [
-        'newer:babel:client',
+        'newer:babel:client'
       ],
       debug: {
         tasks: [
@@ -533,7 +534,7 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           cwd: '<%= yeoman.client %>',
-          src: ['{app,components}/**/!(*.spec).js'],
+          src: ['{app,components,Dialogs,services}/**/!(*.spec).js'],
           dest: '.tmp'
         }]
       },
@@ -580,7 +581,7 @@ module.exports = function(grunt) {
         files: {
           '<%= yeoman.client %>/index.html': [
                [
-                 '<%= yeoman.client %>/{app,components}/**/!(*.spec|*.mock).js',
+                 '<%= yeoman.client %>/{services,app,components,Dialogs}/**/!(*.spec|*.mock).js',
                  '!{.tmp,<%= yeoman.client %>}/app/app.{js,ts}'
                ]
             ]
@@ -601,11 +602,11 @@ module.exports = function(grunt) {
         },
         files: {
           '<%= yeoman.client %>/index.html': [
-            '<%= yeoman.client %>/{app,components}/**/*.css'
+            '<%= yeoman.client %>/{app,components,Dialogs,services}/**/*.css'
           ]
         }
       }
-    },
+    }
   });
 
   // Used for delaying livereload until after server has restarted

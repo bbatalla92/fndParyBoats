@@ -1,29 +1,30 @@
 <section class="container md-padding" style="width:100%; ">
 
-  <div style="text-align: center; margin: 0 auto"  class="list" flex="50" flex-sm="80" flex-xs="100" >
-    <h1 >Party Boats in {{title}}: </h1>
+    <div style="text-align: center; margin: 0 auto" flex="50" flex-sm="80" flex-xs="100">
+        <h1>Party Boats in {{title}}: </h1>
 
-    <div ng-show="loadingFlag" style="z-index: 10; position: absolute; top: 30%; left: 50%; margin-left: -50px">
-      <md-progress-circular md-mode="indeterminate" md-diameter="100"></md-progress-circular>
-    </div>
+        <div ng-show="loadingFlag" style="z-index: 10; position: absolute; top: 30%; left: 50%; margin-left: -50px">
+            <md-progress-circular md-mode="indeterminate" md-diameter="100"></md-progress-circular>
+        </div>
 
-    <div ng-hide="!noCharterFlag">
-      <h3 > {{errorDesc}}</h3>
+        <div ng-hide="!noCharterFlag">
+            <h3> {{errorDesc}}</h3>
+        </div>
+        <md-content style="background-color: inherit">
+            <md-list>
+                <md-card flex ng-repeat="x in charters">
+                    <md-list-item class="md-3-line" ng-click="setBoat(x)">
+                        <img ng-src="{{x.image}}" class="md-avatar" style="width:85px;height: 85px" alt="image"/>
+                        <div class="md-list-item-text" layout="column">
+                            <h3>{{x.name}}</h3>
+                            <h4>{{x.captain }}</h4>
+                            <p>{{x.city}} {{x.state}}</p>
+                        </div>
+                        <span flex></span>
+                        <h5 ng-show="x.distance > 0">{{ x.distance <= 1 ? '< 1': x.distance }} miles away</h5>
+                    </md-list-item>
+                </md-card>
+            </md-list>
+        </md-content>
     </div>
-    <md-content  style="background: inherit">
-    <div ng-repeat="x in charters" style="cursor:pointer">
-    <md-card layout-gt-xs="row" layout-align-gt-xs="space-around" layout-align-xs="center center" class="md-padding" ng-click="setBoat(x)"  ui-sref="boatProfile">
-    <div flex="30" style="text-align:left">
-    <h3 style="margin-top: 0px">{{x.name}}</h3>
-    <h4 style="margin-top: 0px"><i>{{x.city}} {{x.state}}, {{x.zipCode}}</i></h4>
-    </div>
-    <h3 style="margin-top: 0px">Captain:<br/> {{x.captain}}</h3>
-
-
-    <h5 ng-show="x.distance > 0">{{ x.distance <= 1 ? '< 1': x.distance }} miles away</h5>
-    </md-card>
-     
-    </div>
-    </md-content>
-  </div>
 </section>

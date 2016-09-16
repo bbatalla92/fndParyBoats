@@ -2,15 +2,15 @@
 
 (function(){
   angular.module('fndParyBoatsApp')
-  .factory('util', function ($geolocation, $q) {
-    var charter = null;
+  .factory('util',['$geolocation', '$q', function ($geolocation, $q) {
+    var charter = undefined;
     var charterList = [];
     var featuredList = [];
     var loggedIn = false;
-    var stateSelected = null;
-    var zipCode = null;
+    var stateSelected = undefined;
+    var zipCode = undefined;
     var geocoder = new google.maps.Geocoder();
-    var previewCharter = null;
+    var previewCharter = undefined;
 
     function getLatLong(zip){
       var address = '';
@@ -71,6 +71,6 @@
       getLatLong : getLatLong,
       previewCharter: previewCharter  
     };
-  });
+  }]);
 
 })();
