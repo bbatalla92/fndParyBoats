@@ -123,7 +123,8 @@
                 </div>
             </div>
             <div layout="row" layout-align="end end">
-                <md-button aria-label="blah" ng-disabled="profileHeader.$invalid" class="md-fab" ng-click="data.selectedIndex = 1">
+                <md-button aria-label="blah" ng-disabled="profileHeader.$invalid" class="md-fab"
+                           ng-click="data.selectedIndex = 1">
                     <md-icon md-svg-icon="../../assets/icons/arrow-right.svg"></md-icon>
                     <md-tooltip>To General Info</md-tooltip>
                 </md-button>
@@ -137,10 +138,10 @@
             <md-switch ng-model="charter.displayGeneralInfo" aria-label="Switch 1">
                 Display this tab in Profile
             </md-switch>
-            <div>
+            <div >
                 <h4 style="margin: 0 auto">Boating season</h4>
 
-                <div layout="row" layout-align="space-around center" style="width:50%; margin:auto">
+                <div layout="row" layout-align="space-around center" flex="50" flex-sm="90" flex-xs="100" style="margin:auto">
                     <md-select ng-disabled="charter.boatSeason.allYear" aria-label="blah"
                                ng-model="charter.boatSeason.startMonth">
                         <md-option ng-repeat="month in boatingSeasonFrom">
@@ -158,7 +159,7 @@
                         All Year
                     </md-checkbox>
                 </div>
-                <div layout="row" layout-align="space-around">
+                <div layout="row" layout-align="space-around"  layout-sm="column" layout-xs="column">
                     <div layout="column" layout-align="center center">
                         <h4>Rates</h4>
                         <md-button aria-label="blah" class="md-fab" ng-click="addObjects('rates')">
@@ -173,24 +174,31 @@
                                 <label>price <em>($)</em></label>
                                 <input type="text" max="4" ng-model="rate.price"/>
                             </md-input-container>
+                            <md-button aria-label="blah" class="md-icon" ng-click="charter.rates.splice($index, 1)">
+                                <md-icon md-svg-icon="../../assets/icons/ic_delete_black_24px.svg"></md-icon>
+                            </md-button>
                         </div>
                     </div>
 
-                    <div layout="column" layout-align="center center">
+                    <div layout="column" layout-align="center center" >
                         <h4>Departure Times</h4>
                         <md-button class="md-fab" aria-label="blah" ng-click="addObjects('departureTimes')">
                             <md-icon md-svg-icon="../../assets/icons/ic_add_white_24px.svg"></md-icon>
                         </md-button>
                         <div layout="row" layout-align="center center" ng-repeat="time in charter.departureTimes">
                             <md-input-container>
-                                <label>Departure Times</label>
-                                <input type="text" ng-model="charter.departureTimes.time" maxlength="5" minlength="1"/>
+                                <label>Time</label>
+                                <input type="text" ng-model="time.time" maxlength="5" minlength="1"/>
                             </md-input-container>
-                            <md-select ng-model="charter.departureTimes.ampm" aria-label="blah"
+                            <md-select value="time.ampm" ng-model="time.ampm" aria-label="blah"
                                        style="margin-bottom: 44px">
-                                <md-option>am</md-option>
-                                <md-option>pm</md-option>
+                                <md-option value="am">am</md-option>
+                                <md-option value="pm">pm</md-option>
                             </md-select>
+                            <md-button aria-label="blah" class="md-icon"
+                                       ng-click="charter.departureTimes.splice($index, 1)">
+                                <md-icon md-svg-icon="../../assets/icons/ic_delete_black_24px.svg"></md-icon>
+                            </md-button>
                         </div>
                     </div>
                 </div>
@@ -202,27 +210,39 @@
                     </md-select>
                 </div>
 
-                <div layout="row" layout-align="space-around">
+                <div layout="row" layout-align="space-around"  layout-sm="column" layout-xs="column">
 
-                    <div layout="column" layout-align="center center" style="width: 40%">
+                    <div layout="column" layout-align="center center" flex="40" flex-sm="80" flex-xs="100">
                         <h4>Onboard Services</h4>
                         <md-button class="md-fab" aria-label="blah" ng-click="addObjects('onboardServices')">
                             <md-icon md-svg-icon="../../assets/icons/ic_add_white_24px.svg"></md-icon>
                         </md-button>
-                        <md-input-container ng-repeat="service in charter.onboardServices" style="width:100%">
-                            <label>Onboard Services<em>(ex. rod rentals, onboard filet chef)</em></label>
-                            <input ng-model="service.name" type="text"/>
-                        </md-input-container>
+                        <div layout="row" style="width: 100%; margin-top:30px" ng-repeat="service in charter.onboardServices" >
+                            <md-input-container style="width:100%">
+                                <label>Onboard Services<em>(ex. rod rentals, onboard filet chef)</em></label>
+                                <input ng-model="service.name" type="text"/>
+                            </md-input-container>
+                            <md-button aria-label="blah" class="md-icon"
+                                       ng-click="charter.onboardServices.splice($index, 1)">
+                                <md-icon md-svg-icon="../../assets/icons/ic_delete_black_24px.svg"></md-icon>
+                            </md-button>
+                        </div>
                     </div>
-                    <div layout="column" layout-align="center center" style="width: 40%">
+                    <div layout="column" layout-align="center center"  flex="40" flex-sm="80" flex-xs="100">
                         <h4>Additional Services</h4>
                         <md-button class="md-fab" aria-label="blah" ng-click="addObjects('additionalServices')">
                             <md-icon md-svg-icon="../../assets/icons/ic_add_white_24px.svg"></md-icon>
                         </md-button>
-                        <md-input-container ng-repeat="service in charter.additionalServices" style="width:100%">
-                            <label>Additional Services<em>(ex. Sunset cruises, Dophin viewings)</em></label>
-                            <input ng-model="service.name" type="text"/>
-                        </md-input-container>
+                        <div layout="row" layout-align="center center" style="width: 100%; margin-top:30px" ng-repeat="service in charter.additionalServices">
+                            <md-input-container  style="width:100%">
+                                <label>Additional Services<em>(ex. Sunset cruises, Dophin viewings)</em></label>
+                                <input ng-model="service.name" type="text"/>
+                            </md-input-container>
+                            <md-button aria-label="blah" class="md-icon"
+                                       ng-click="charter.additionalServices.splice($index, 1)">
+                                <md-icon md-svg-icon="../../assets/icons/ic_delete_black_24px.svg"></md-icon>
+                            </md-button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -263,15 +283,15 @@
 </div>
 <br>
 
-<div id="adminActionButtons" style="margin-bottom: 20px"  layout="row">
+<div id="adminActionButtons" style="margin-bottom: 20px" layout="row">
     <md-button ng-hide="true" style="color: whitesmoke;background-color: gold" aria-label="blah" class="md-raised"
                ng-click="cancelChanges()">Get Featured!
     </md-button>
     <span flex></span>
     <md-button class="md-raised md-warn" ng-click="cancelChanges()" aria-label="blah">Cancel</md-button>
-    <md-button style="color: dimgrey;background-color: #ffff00" ng-click="previewChanges()"
-               ng-disabled="profileHeader.$invalid" aria-label="blah" class="md-raised">Preview
-    </md-button>
+    <!--<md-button style="color: dimgrey;background-color: #ffff00" ng-click="previewChanges()"-->
+               <!--ng-disabled="profileHeader.$invalid" aria-label="blah" class="md-raised">Preview-->
+    <!--</md-button>-->
     <md-button aria-label="blah" class="md-raised md-primary" ng-click="saveChanges()"
                ng-disabled="profileHeader.$invalid || aboutForm.$invalid">Save
     </md-button>

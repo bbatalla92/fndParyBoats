@@ -1,7 +1,7 @@
 <section class="container md-padding" style="width:100%; ">
 
     <div style="text-align: center; margin: 0 auto" flex="50" flex-sm="80" flex-xs="100">
-        <h1>Party Boats in {{title}}: </h1>
+        <h1>Party Boats {{title}}: </h1>
 
         <div ng-show="loadingFlag" style="z-index: 10; position: absolute; top: 30%; left: 50%; margin-left: -50px">
             <md-progress-circular md-mode="indeterminate" md-diameter="100"></md-progress-circular>
@@ -10,7 +10,7 @@
         <div ng-hide="!noCharterFlag">
             <h3> {{errorDesc}}</h3>
         </div>
-        <md-content style="background-color: inherit">
+        <md-content style="background-color: inherit" ng-hide="noCharterFlag || loadingFlag ">
             <md-list>
                 <md-card flex ng-repeat="x in charters">
                     <md-list-item class="md-3-line" ng-click="setBoat(x)">

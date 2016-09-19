@@ -7,8 +7,9 @@
             $scope.mapUrl = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyD7gE6eRHVSSO5ZVNoM2eNkElHp-Rig1jg';
             //  console.log('boat id', $stateParams);
             $scope.center = '';
+            $scope.previewMode = false;
 
-            if (util.previewCharter != null) {
+            if ($state.params.preview) {
                 $scope.previewMode = true;
                 util.previewCharter = null;
             } else {
@@ -17,7 +18,6 @@
 
 // ===============  Getting Charter ===========================================================
             $scope.loadingFlag = true;
-            console.log('state',$state);
             getCharter();
 
             function getCharter(){
@@ -37,10 +37,7 @@
             }
 
             function getCharterFromService(id, newCharter){
-                console.log('id',id);
-
                 dbService.getCharterByID(id).then(function (charter) {
-                    console.log('charter',charter);
                     $scope.charter = charter;
                     $scope.loadingFlag = false;
                     if (charter.fosterID != undefined && newCharter) {

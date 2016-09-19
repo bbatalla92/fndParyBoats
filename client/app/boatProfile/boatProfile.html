@@ -11,7 +11,7 @@
         <div class="centerText" flex="50" flex-xs="100">
             <h1><b>{{charter.name.toUpperCase()}}</b></h1>
 
-            <h3>Captain <b>{{charter.captain}}</b></h3>
+            <h3 ng-if="charter.captain">Captain <b>{{charter.captain}}</b></h3>
             <h4><i>{{charter.street}}, {{charter.city}} {{charter.state}}, {{charter.zipCode}}</i></h4>
             <h5>Website: <a href="http://{{charter.website}}" target="_blank" ng-click="">{{charter.website}}</a></h5>
             <h5>Phone Number: {{charter.phoneNumber}}</h5>
@@ -51,7 +51,7 @@
                             </td>
                         </tr>
                         <tr md-row ng-if="charter.departureTimes">
-                            <td md-cell>Departure Times and Length</td>
+                            <td md-cell>Departure Times</td>
                             <td md-cell>
                                 <ul ng-repeat="time in charter.departureTimes">
                                     <li>{{time.time}} {{time.ampm}}</li>
@@ -110,6 +110,6 @@
      layout="row">
     <div style="margin: 0 auto">
         <md-button ng-click="previewBack()" class="md-raised md-primary">Back</md-button>
-        <md-button ng-click="previewSave()" class="md-raised md-warned">Save</md-button>
+        <!--<md-button ng-click="previewSave()" class="md-raised md-warned">Save</md-button>-->
     </div>
 </div>

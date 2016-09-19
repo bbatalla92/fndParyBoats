@@ -1,12 +1,24 @@
-<md-toolbar style=" height: 2vh; text-align: center">
+<md-toolbar style=" height: 64px; text-align: center">
     <div class="md-toolbar-tools">
-        <md-button style="min-width: 1%; margin-left: 2%" ui-sref="main" ng-click="home()" aria-label="home">
+        <md-button hide-gt-xs style="min-width: 1%; margin-left: 2%" ng-click="openDrawer()" aria-label="home">
+            <md-icon md-svg-src="../assets/icons/ic_hamburger_white_24px.svg"></md-icon>
+        </md-button>
+        <h1  id="headerTitle" style="margin-left: 5%">Find Party Boats</h1>
+
+
+        <span hide-xs  flex layout="row" layout-align="end" id="pageLinks">
+            <a ng-click="home()" ui-sref="main" ng-class="{'currentPageLink': currentUrl === '/'}"> Home</a> |
+            <a ui-sref="states" ng-class="{'currentPageLink': currentUrl === '/states'}"> Search By State</a> |
+            <!--<a> Articles</a> |-->
+            <a ui-sref="about" ng-class="{'currentPageLink': currentUrl === '/about'}"> About</a>  |
+            <a ui-sref="contactForm" ng-class="{'currentPageLink': currentUrl === '/contact'}"> Contact </a>
+        </span>
+        <span hide-gt-xs flex></span>
+        <md-button hide-gt-xs style="min-width: 1%; margin-left: 2%" ui-sref="main" ng-click="home()" aria-label="home"
+                   layout="row" layout-align="center endr">
             <md-icon md-svg-src="../assets/icons/ic_home_white_24px.svg"></md-icon>
         </md-button>
-    <span flex>
-          <h1 id="headerTitle">Find Party Boats!</h1>
-    </span>
-        <md-menu style="margin-right: 3%">
+        <md-menu style="margin-right: 3%; min-width: 50px">
             <md-button ng-show="userFlag" style="background-color: #00b3ee" class="md-icon-button md-raised"
                        aria-label="menu" ng-click="openMenu($mdOpenMenu,$event)">
                 <md-icon md-svg-src="../assets/icons/ic_person_outline_white_24px.svg"></md-icon>
@@ -40,8 +52,42 @@
                    style="min-width: 1%; height: 2%; margin: 0; padding: 1%;" ng-click="search()">
             <md-icon md-svg-src="../../assets/icons/ic_search_black_24px.svg"></md-icon>
         </md-button>
-        <p style="margin-top: 1.8%">or Search by <a ui-sref="states">location</a></p>
+        <p style="margin-top: 1.8%">or Search by <a ui-sref="states">State</a></p>
 
     </div>
 
 </md-subheader>
+
+<md-sidenav
+        class="md-sidenav-left"
+        md-component-id="left"
+        hide-gt-xs
+        md-whiteframe="4">
+
+    <md-toolbar style="text-align: center; color:#f5f5f5">
+        <h2>Menu</h2>
+    </md-toolbar>
+
+    <md-list>
+        <md-list-item ui-sref="main" ng-class="{'currentPageListItem': currentUrl === '/'}">
+            Home
+        </md-list-item>
+        <md-divider></md-divider>
+
+        <md-list-item ui-sref="states" ng-class="{'currentPageListItem': currentUrl === '/states'}">
+            Search By State
+        </md-list-item>
+        <md-divider></md-divider>
+
+        <md-list-item ui-sref="about" ng-class="{'currentPageListItem': currentUrl === '/about'}">
+            About
+        </md-list-item>
+        <md-divider></md-divider>
+        <md-list-item ui-sref="contactForm" ng-class="{'currentPageListItem': currentUrl === '/contact'}">
+            Contact Us
+        </md-list-item>
+        <md-divider></md-divider>
+
+    </md-list>
+
+    </md-sidenav>

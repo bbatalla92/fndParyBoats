@@ -3,7 +3,7 @@
 (function () {
 
     angular.module('fndParyBoatsApp')
-        .controller('NavbarController', ['$scope',  '$state', '$mdMenu', '$stateParams','util', 'dbService', function ($scope, $state, $mdMenu, $stateParams,util, dbService) {
+        .controller('NavbarController', ['$scope',  '$state', '$mdMenu', '$stateParams','util', 'dbService','$mdSidenav', function ($scope, $state, $mdMenu, $stateParams,util, dbService, $mdSidenav) {
             $scope.zip = undefined;
             $scope.$watch(function () {
                 $scope.userFlag = dbService.getCurrentUser();
@@ -24,10 +24,13 @@
                 });
             };
 
+            $scope.openDrawer = function(){
+                $mdSidenav('left').toggle();
+            };
 
             $scope.$watch(function () {
-
-                if ($state.current.url == '/' || $state.current.url == '/admin') {
+                    $scope.currentUrl = $state.current.url;
+                if ($scope.currentUrl == '/' || $scope.currentUrl == '/admin') {
                     $scope.subheaderFlag = true;
                     return;
                 }
@@ -60,11 +63,12 @@
                 util.zipCode = $scope.zip;
                 $scope.zip = '';
                 if ($state.current.name === 'searchList') {
-                    $state.transitionTo($state.current, $stateParams, { reload: true, inherit: false, notify: true });
+                    $state.go($state.current, {crit: util.zipCode}, { reload: true, inherit: false, notify: true });
                     $scope.$digest();
                 } else {
-                    $state.go('searchList');
+                    $state.go('searchList',{crit: util.zipCode});
                 }
+
             }
         }]);
 

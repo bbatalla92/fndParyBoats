@@ -115,6 +115,9 @@
                 });
             }
 
+            $scope.test = function(){
+                console.log('test', $scope.charter.departureTimes.ampm);
+            };
 
             $scope.cancelChanges = function () {
                 $scope.charter = angular.copy(curPost);
@@ -123,8 +126,6 @@
             $scope.saveChanges = function () {
 
                 curPost = angular.copy($scope.charter);
-                console.log('prop', curPost);
-
                 if (curPost.email.includes("http://")) {
                     curPost.email = curPost.email.replace("http://", '');
                 }
@@ -145,7 +146,7 @@
             $scope.previewChanges = function () {
                 util.setCharter($scope.charter);
                 util.previewCharter = $scope.charter;
-                $state.go('boatProfile');
+                $state.go('boatProfile',{crit:'', preview: true});
             };
 
 

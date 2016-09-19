@@ -7,53 +7,46 @@
             // Functions initiated
             $scope.setBoat = setBoat;
             $scope.orderListBy = '';
-
             $scope.loadingFlag = true;
             $scope.noCharterFlag = false;
             $scope.title = '';
-
-            $scope.errorDesc = 'Sorry, no party boats in your area.  If you know of any, tell them about our site!'
-
-
+            $scope.errorDesc = 'Sorry, no party boats in your area.  If you know of any, tell them about our site!';
             // Data variables
-            $scope.charters = util.charterList;
-            if ($scope.charters.length < 1) {
-
-
-                if (util.zipCode != null || util.stateSelected != null) {
-
-                    if (util.stateSelected == null) {
-
-                        zipcodeFlags(util.zipCode);
-                        $cookies.put('searchKey', util.zipCode);
-                        $scope.orderListBy = 'distance';
-                    } else {
-                        stateFlags(util.stateSelected);
-                        $cookies.put('searchKey', util.stateSelected);
-                        $scope.orderListBy = null;
-
-                    }
-                } else if ($cookies.get('searchKey') != undefined) {
-                    var key = $cookies.get('searchKey');
-                    if (key.length === 2) {
-                        stateFlags(key);
-                    } else {
-                        zipcodeFlags(key);
-                    }
-                }
-                else {
-                    $scope.loadingFlag = false;
-                    $scope.noCharterFlag = true;
-                    $scope.errorDesc = 'Sorry, please try searching again.'
-                }
-            } else {
-                $scope.loadingFlag = false;
-            }
+            getSearchList();
 
             //=========functions ==============================================
             $scope.test = function () {
                 console.log('test');
             };
+
+            function getSearchList(){
+                $scope.charters = util.charterList;
+                var critLength = $state.params.crit.length;
+                if (!$scope.charters.length) {
+
+                    if ( critLength === 2 || critLength === 5) {
+                        if(isState(critLength))
+                            stateFlags($state.params.crit);
+                        else
+                            zipcodeFlags($state.params.crit)
+                    } else {
+                        $scope.loadingFlag = false;
+                        $scope.noCharterFlag = true;
+                    }
+                } else {
+                    $scope.loadingFlag = false;
+                    if(isState(critLength))
+                        $scope.title = 'in '+ $state.params.crit;
+                    else
+                        $scope.title = 'around '+ $state.params.crit;
+
+
+                }
+            }
+
+            function isState(param){
+                return param === 2;
+            }
 
             function setBoat(charter) {
                 util.setCharter(charter);
@@ -62,7 +55,7 @@
             }
 
             function zipcodeFlags(zip) {
-                $scope.title = zip;
+                $scope.title = 'around ' + zip;
                 dbService.getCharterKeysByZip(zip).then(function (data) {
                     $scope.loadingFlag = false;
                     if (data == null && $scope.charters.length < 1)
@@ -70,16 +63,26 @@
                     else {
                         $scope.charters = data;
                         util.charterList = data;
+                        $scope.noCharterFlag = false;
+
                     }
                 });
             }
 
             function stateFlags(state) {
-                $scope.title = state;
-                dbService.getChartersByState(state).then(function (data) {
+                console.log('state?', state);
+                $scope.title = 'in '+ state;
+                dbService.getChartersByState(state.toUpperCase()).then(function (data) {
                     $scope.charters = data;
+                    if (data === null || $scope.charters.length < 1) {
+                        $scope.noCharterFlag = true;
+                    }else {
+                       util.charterList = data;
+                        $scope.noCharterFlag = false;
+
+                    }
                     $scope.loadingFlag = false;
-                    util.charterList = data;
+
                 });
             }
 
