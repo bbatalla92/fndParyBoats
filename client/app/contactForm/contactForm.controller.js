@@ -7,16 +7,17 @@
                 name: "",
                 subject: "",
                 email: "",
-                body: ''};
+                body: '',
+                joinNewsLetter: true};
             $scope.contact = angular.copy(contactDefault);
 
             $scope.sendEmail = function () {
-                //console.log('email sent',$scope.contact);
+                console.log('email sent',$scope.contact);
                 dbService.sendContactUsEmail($scope.contact);
                 $scope.sentFlag = true;
 
                 $timeout(function () {
-                }, 1500).then(function () {
+                }, 3000).then(function () {
                     $scope.sentFlag = false;
                 });
                 $scope.contact = angular.copy(contactDefault);

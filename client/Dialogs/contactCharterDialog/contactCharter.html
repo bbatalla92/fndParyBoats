@@ -1,0 +1,69 @@
+<md-dialog flex>
+  <md-toolbar style="min-height: 1%">
+    <div>
+      <h2 style="margin:7px">Contact</h2>
+    </div>
+  </md-toolbar>
+  <br>
+  <md-dialog-content class="md-padding" layout="column" layout-align="center center" style="margin-top: 10px">
+    <br/>
+    <h2 style="color: #4cae4c" ng-show="messageSent">
+      Message Sent!
+    </h2>
+    <form name="contactForm" ng-hide="messageSent">
+
+      <form name="contactForm">
+        <div layout="column">
+          <md-input-container class="md-block">
+            <label>Email</label>
+            <input required type="email" name="email" ng-model="contactCharter.from"
+                   minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/"/>
+            <div ng-messages="contactForm.email.$error" role="alert">
+              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                Your email must be between 10 and 100 characters long and look like an e-mail address.
+              </div>
+            </div>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Subject</label>
+            <input required type="text" name="subject" ng-model="contactCharter.subject"
+                   minlength="10" maxlength="60"/>
+            <div ng-messages="contactForm.subject.$error" role="alert">
+              <div ng-message-exp="['required', 'minlength', 'maxlength']">
+                Subject must be between 10 and 60 characters long.
+              </div>
+            </div>
+          </md-input-container>
+          <div>
+                    <textarea style="width:100%;resize:vertical; height: 300px" name="body"
+                              ng-model="contactCharter.message"
+                              placeholder="Message" required minlength="10">
+                    </textarea>
+            <div ng-messages="contactForm.body.$error" role="alert">
+              <div ng-message-exp="['required', 'minlength']">
+                Your message must be greater than 10 characters long.
+              </div>
+            </div>
+            <md-checkbox ng-model="contactCharter.joinNewsLetter" ng-value="contactCharter.joinNewsLetter"
+                         aria-label="Checkbox 1">
+              Join News letter
+            </md-checkbox>
+          </div>
+        </div>
+      </form>
+
+
+    </form>
+
+  </md-dialog-content>
+  <md-dialog-actions>
+    <md-button class="md-raised md-warn" style="color:whitesmoke" ng-click="cancelDialog()"> {{messageSent ?
+      'Ok':'Cancel'}}
+    </md-button>
+    <md-button ng-hide="messageSent" ng-disabled="contactForm.$invalid" class="md-raised "
+               style="background-color: #4cae4c; color:whitesmoke" ng-click="sendContactCharter()">
+      Send
+    </md-button>
+  </md-dialog-actions>
+
+</md-dialog>

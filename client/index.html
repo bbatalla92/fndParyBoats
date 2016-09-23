@@ -8,7 +8,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <base href="/">
   <title>Find Party Boats</title>
-  <meta name="description" content="Looking for a great group fishing boat near you? Click here and we will find you your next fishing excursion easily and for free near you by zip code or state!">
+  <meta name="description" content="Looking for a charter or party boat near you? Click here and we will find you your next fishing excursion easily and for free by zip code or state!">
   <meta name="viewport" content="width=device-width">
   <meta robots="index,follow">
   <meta keywords="fishing, party boats, group party boats, group fishing, charter boats, fishing group, find party boats, find party boats near me, find charter boats, find charter boats near me, fising excursions, fishing adventure">
@@ -65,8 +65,8 @@
 <!-- Add your site or application content here -->
 
 <navbar></navbar>
-<div style="background-color: whitesmoke" ui-view=""></div>
-
+<div style="background-color: whitesmoke; min-height: 75%" ui-view=""></div>
+<footer></footer>
 <!--
     <footer></footer>
 -->
@@ -124,7 +124,8 @@
 <script src="app/app.js"></script>
 <!-- injector:js -->
 <script src="app/main/main.js"></script>
-<script src="Dialogs/loginDialog/loginDialog.js"></script>
+<script src="Dialogs/contactCharterDialog/contactCharter.controller.js"></script>
+<script src="app/about/about.controller.js"></script>
 <script src="app/about/about.js"></script>
 <script src="app/admin/admin.controller.js"></script>
 <script src="app/admin/admin.js"></script>
@@ -136,16 +137,18 @@
 <script src="app/contactForm/contactForm.controller.js"></script>
 <script src="app/contactForm/contactForm.js"></script>
 <script src="app/main/main.controller.js"></script>
-<script src="app/about/about.controller.js"></script>
+<script src="Dialogs/loginDialog/loginDialog.js"></script>
 <script src="app/searchList/searchList.controller.js"></script>
 <script src="app/searchList/searchList.js"></script>
 <script src="app/siteAdmin/siteAdmin.controller.js"></script>
 <script src="app/siteAdmin/siteAdmin.js"></script>
 <script src="app/states/states.controller.js"></script>
 <script src="app/states/states.js"></script>
+<script src="components/footer/footer.controller.js"></script>
 <script src="components/footer/footer.directive.js"></script>
 <script src="components/navbar/navbar.controller.js"></script>
 <script src="components/navbar/navbar.directive.js"></script>
+<script src="services/articlesDB/articlesDB.service.js"></script>
 <script src="services/constantsService/constants.js"></script>
 <script src="services/dbService/dbService.js"></script>
 <script src="services/util/util.service.js"></script>

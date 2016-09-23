@@ -15,6 +15,9 @@
             <h4><i>{{charter.street}}, {{charter.city}} {{charter.state}}, {{charter.zipCode}}</i></h4>
             <h5>Website: <a href="http://{{charter.website}}" target="_blank" ng-click="">{{charter.website}}</a></h5>
             <h5>Phone Number: {{charter.phoneNumber}}</h5>
+            <md-button class="md-raised md-accent" ng-click="openContactDialog($event)" style="color: whitesmoke; min-height: 1%; min-width: 1%">
+              Contact
+            </md-button>
         </div>
     </div>
     <br/>

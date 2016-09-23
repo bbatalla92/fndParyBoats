@@ -2,7 +2,8 @@
 (function () {
 
     angular.module('fndParyBoatsApp')
-        .controller('profileCtrl', ['$scope', 'util', '$cookies', '$state', 'dbService', '$mdToast', '$stateParams', '$mdDialog', function ($scope, util, $cookies, $state, dbService, $mdToast, $stateParams, $mdDialog) {
+        .controller('profileCtrl', ['$scope', 'util', '$cookies', '$state', 'dbService', '$mdToast', '$stateParams', '$mdDialog',
+          function ($scope, util, $cookies, $state, dbService, $mdToast, $stateParams, $mdDialog) {
             $scope.loadingFlag = false;
             $scope.mapUrl = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyD7gE6eRHVSSO5ZVNoM2eNkElHp-Rig1jg';
             //  console.log('boat id', $stateParams);
@@ -79,7 +80,19 @@
                         .hideDelay(2000)
                 );
                 $state.go('admin');
-            }
+            };
+
+          $scope.openContactDialog = function(ev){
+                $mdDialog.show({
+                  controller: "contactCharterCtrl",
+                  templateUrl: 'Dialogs/contactCharterDialog/contactCharter.html',
+                  targetEvent: ev,
+                  clickOutsideToClose:true,
+                  locals:{
+                    charterEmail: $scope.charter.email
+                  }
+                });
+          }
 
 
         }]);

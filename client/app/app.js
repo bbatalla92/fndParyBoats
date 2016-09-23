@@ -15,7 +15,6 @@ angular.module('fndParyBoatsApp', [
     'angularTrix',
     'ngMap',
     'md.data.table'
-    
   ])
   .config(['$urlRouterProvider', '$locationProvider','$mdThemingProvider',function($urlRouterProvider, $locationProvider, $mdThemingProvider) {
 
@@ -103,7 +102,7 @@ angular.module('fndParyBoatsApp', [
             .primaryPalette('customPrimary')
             .accentPalette('customAccent')
             .warnPalette('customWarn')
-            .backgroundPalette('customBackground')
+            .backgroundPalette('customBackground');
 
 
     $urlRouterProvider.otherwise('/');
